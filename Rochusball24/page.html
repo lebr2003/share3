@@ -71,10 +71,23 @@
 <body>
   <h1>LEANDER BRUNAR</h1>
   <h2>Rochusball 2024</h2>
-  <video controls>
+  
+  <!-- Video 1 -->
+  <video id="video1" controls>
     <source src="/Quelle/DJI_0047.MP4" type="video/MP4">
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
+  <button onclick="downloadVideo('DJI_0047.MP4')">Download Video 1</button>
+  
+  <!-- Video 2 -->
+  <video id="video2" controls>
+    <source src="/Quelle/DeinVideo2.MTS" type="video/MTS">
+    Dein Browser unterstützt das Video-Tag nicht.
+  </video>
+  <button onclick="downloadVideo('DeinVideo2.MTS')">Download Video 2</button>
+
+  <!-- Weitere Videos hier nach dem gleichen Muster -->
+
   <button onclick="goBack()">Zurück</button>
   <p></p>
   <p>20 YEARS OLD</p>
@@ -82,12 +95,20 @@
   <p>VIENNA</p>
 
   <script>
-
-function goBack() {
-      window.history.back();
+    function downloadVideo(filename) {
+      // Hier könntest du die Download-Logik implementieren, z.B., indem du einen Link zu der Video-Datei erstellst.
+      // Für dieses Beispiel wird ein Dummy-Link erstellt:
+      var link = document.createElement('a');
+      link.href = '/Quelle/' + filename; // Passe den Pfad an, falls notwendig
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
 
-
+    function goBack() {
+      window.history.back();
+    }
   </script>
 </body>
 </html>
