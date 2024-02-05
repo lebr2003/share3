@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/3196d310-9f5c-4aa3-9efd-229f42032276_carw_1x1x32.jpeg?h=fd0310396e87cc87e9afb7e4d343984e" />
-     <link rel="apple-touch-icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/f810a750-a3b1-4d2d-aadc-9d9733d7f235_carw_1x1x180.jpeg?h=9d3d9be30d26b566bf0dd7e6e9472ce3" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/3196d310-9f5c-4aa3-9efd-229f42032276_carw_1x1x32.jpeg?h=fd0310396e87cc87e9afb7e4d343984e" />
+  <link rel="apple-touch-icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/f810a750-a3b1-4d2d-aadc-9d9733d7f235_carw_1x1x180.jpeg?h=9d3d9be30d26b566bf0dd7e6e9472ce3" />
   <title>Rochusball 2024</title>
+  <style>
+    body {
+      background-color: #FAFCFF;
+      font-family: 'Bebas Kai', sans-serif;
+      font-stretch: ultra-condensed;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #022A55;
+      font-size: 50px;
+      line-height: 50px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #2D6CAF; /* Farbe für die Unterüberschrift */
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    button {
+      background-color: #022A55;
+      color: #FFFFFF;
+      font-size: 18px;
+      height: 48px;
+      width: auto;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      font-stretch: ultra-condensed;
+      padding: 0 30px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    p {
+      color: #C0C6CC;
+      font-size: 16px;
+      line-height: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-    <p>Rochusball 2024</p>
+  <h1>LEANDER BRUNAR</h1>
+  <h2>Rochusball 2024</h2>
+  <video controls>
+    <source src="/quelle/00349.MTS" type="video/MTS">
+    Dein Browser unterstützt das Video-Tag nicht.
+  </video>
+  <button onclick="goBack()">Zurück</button>
+  <p></p>
+  <p>20 YEARS OLD</p>
+  <p>VIDEOGRAPHY & PHOTOGRAPHY</p>
+  <p>VIENNA</p>
+
+  <script>
+
+function goBack() {
+      window.history.back();
+    }
+
+
+  </script>
 </body>
 </html>
