@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #FAFCFF;
+      font-family: 'Bebas Kai', sans-serif;
+      font-stretch: ultra-condensed;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #022A55;
+      font-size: 50px;
+      line-height: 50px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #2D6CAF; /* Farbe für die Unterüberschrift */
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      background-color: #022A55;
+      color: #FFFFFF;
+      font-size: 18px;
+      height: 48px;
+      width: 200px; /* Anpassen der Breite nach Bedarf */
+      border: none;
+      border-radius: 100px;
+      padding: 0 20px; /* Anpassen des Innenabstands nach Bedarf */
+      margin-bottom: 10px;
+      font-stretch: ultra-condensed;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #022A55;
+      color: #FFFFFF;
+      font-size: 18px;
+      height: 48px;
+      width: auto;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      font-stretch: ultra-condensed;
+      padding: 0 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    p {
+      color: #C0C6CC;
+      font-size: 16px;
+      line-height: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>LEANDER BRUNAR</h1>
+  <h2>Share-Plattform</h2>
+  <input id="redirectInput" type="text" placeholder="Enter text" onkeypress="handleKeyPress(event)">
+  <p></p>
+  <button onclick="redirectToHomepage()">STARTSEITE</button>
+  <p></p>
+  <p>20 YEARS OLD</p>
+  <p>VIDEOGRAPHY & PHOTOGRAPHY</p>
+  <p>VIENNA</p>
+
+  <script>
+    function redirectToInput() {
+      const inputValue = document.getElementById("redirectInput").value;
+      if (inputValue) {
+        window.location.href = "/" + inputValue;
+      }
+    }
+
+    function redirectToHomepage() {
+      window.location.href = "https://leanderbrunar.net/";
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        redirectToInput();
+      }
+    }
+  </script>
+</body>
+</html>
