@@ -25,12 +25,16 @@
       font-size: 50px;
       line-height: 50px;
       margin-bottom: 10px;
+      font-family: 'Bebas Kai', sans-serif;
+      font-stretch: ultra-condensed;
     }
 
     h2 {
       color: #2D6CAF; /* Farbe für die Unterüberschrift */
       font-size: 24px;
       margin-bottom: 30px;
+      font-family: 'Bebas Kai', sans-serif;
+      font-stretch: ultra-condensed;
     }
 
     input[type="text"] {
@@ -57,6 +61,7 @@
       border-radius: 100px;
       cursor: pointer;
       transition: opacity 0.3s ease;
+      font-family: 'Bebas Kai', sans-serif;
       font-stretch: ultra-condensed;
       padding: 0 30px;
       font-weight: bold;
@@ -73,6 +78,8 @@
       line-height: 10px;
       margin-bottom: 20px;
       font-weight: bold;
+      font-family: 'Bebas Kai', sans-serif;
+      font-stretch: ultra-condensed;
     }
   </style>
 </head>
@@ -92,7 +99,7 @@
     function redirectToInput() {
       const inputValue = document.getElementById("redirectInput").value;
       if (inputValue) {
-        window.location.href = "/" + inputValue + ".html";
+        window.location.href = "/" + inputValue + "/page.html";
       }
     }
 
