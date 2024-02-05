@@ -33,9 +33,21 @@
       margin-bottom: 30px;
     }
 
+    .video-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px; /* Abstand zwischen den Video-Containern */
+    }
+
+    .video-wrapper {
+      width: 400px; /* Breite der Video-Container */
+      margin: 10px;
+    }
+
     video {
       width: 100%;
-      max-width: 600px;
+      max-width: 100%; /* Volle Breite innerhalb des Containers */
     }
 
     button {
@@ -54,6 +66,7 @@
       margin-top: 10px;
     }
 
+
     button:hover {
       opacity: 0.8;
     }
@@ -65,6 +78,10 @@
       margin-bottom: 20px;
       font-weight: bold;
     }
+
+    .back-button {
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -72,23 +89,29 @@
   <h1>LEANDER BRUNAR</h1>
   <h2>Rochusball 2024</h2>
   
-  <!-- Video 1 -->
-  <video id="video1" controls>
-    <source src="Quelle/DJI_0047.MP4" type="video/MP4">
-    Dein Browser unterstützt das Video-Tag nicht.
-  </video>
-  <button onclick="downloadVideo('DJI_0047.MP4')">Download Video 1</button>
-  
-  <!-- Video 2 -->
-  <video id="video2" controls>
-    <source src="Quelle/DeinVideo2.MTS" type="video/MTS">
-    Dein Browser unterstützt das Video-Tag nicht.
-  </video>
-  <button onclick="downloadVideo('DeinVideo2.MTS')">Download Video 2</button>
+  <div class="video-container">
+    <!-- Video 1 -->
+    <div class="video-wrapper">
+      <video id="video1" controls>
+        <source src="Quelle/Video1.MP4" type="video/MP4">
+        Dein Browser unterstützt das Video-Tag nicht.
+      </video>
+      <Button onclick="downloadVideo('Video1.MP4')">Download</button>
+    </div>
+    
+    <!-- Video 2 -->
+    <div class="video-wrapper">
+      <video id="video2" controls>
+        <source src="Quelle/Video2.MP4" type="video/MP4">
+        Dein Browser unterstützt das Video-Tag nicht.
+      </video>
+      <Button onclick="downloadVideo('Video2.MP4')">Download</button>
+    </div>
 
-  <!-- Weitere Videos hier nach dem gleichen Muster -->
+    <!-- Weitere Videos hier nach dem gleichen Muster -->
+  </div>
 
-  <button onclick="goBack()">Zurück</button>
+  <button onclick="goBack()" class="back-button">Zurück</button>
   <p></p>
   <p>20 YEARS OLD</p>
   <p>VIDEOGRAPHY & PHOTOGRAPHY</p>
@@ -96,10 +119,8 @@
 
   <script>
     function downloadVideo(filename) {
-      // Hier könntest du die Download-Logik implementieren, z.B., indem du einen Link zu der Video-Datei erstellst.
-      // Für dieses Beispiel wird ein Dummy-Link erstellt:
       var link = document.createElement('a');
-      link.href = 'Quelle/' + filename; // Passe den Pfad an, falls notwendig
+      link.href = 'Quelle/' + filename;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
