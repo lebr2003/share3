@@ -1096,6 +1096,13 @@ function goBack() {
     }
 }
 
+document.addEventListener('click', function(event) {
+    if (event.target.tagName === 'BUTTON' && event.target.getAttribute('onclick')) {
+        var buttonText = event.target.textContent.trim();
+        var videoName = event.target.getAttribute('onclick').match(/'(.*?)'/)[1];
+        ga('send', 'event', 'Download-Button', buttonText, videoName);
+    }
+});
 
 
 
