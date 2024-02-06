@@ -159,6 +159,11 @@ function generateTxtFile() {
     <button onclick="downloadVideo('${finalDownloadLink}')">Download</button>
 </div>
 `;
+            // Überprüfe, ob die Sequenz durch 3 teilbar ist und füge den HTML-Code hinzu
+            if ((parseInt(startInput.value) + i) % 3 === 0) {
+                content += `</div>
+        <div class="video-container">`;
+            }
         }
     } else if (fileTypeSelect.value === "video") {
         for (var i = 0; i < parseInt(numberInput.value); i++) {
@@ -179,6 +184,11 @@ function generateTxtFile() {
     <button onclick="downloadVideo('${finalDownloadLink}')">Download</button>
 </div>
 `;
+            // Überprüfe, ob die Sequenz durch 3 teilbar ist und füge den HTML-Code hinzu
+            if ((parseInt(startInput.value) + i) % 3 === 0) {
+                content += `</div>
+        <div class="video-container">`;
+            }
         }
     }
 
@@ -189,6 +199,7 @@ function generateTxtFile() {
     anchor.href = window.URL.createObjectURL(blob);
     anchor.click();
 }
+
 
 
 
