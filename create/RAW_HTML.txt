@@ -208,7 +208,16 @@ padding-bottom: 30px;
     if (e.persisted) { window.location.reload(); }
   };
 
- function downloadVideo(filename) {
+function downloadVideo(filename) {
+    var buttonText = 'Download'; // Du kannst den Button-Text statisch festlegen
+    var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
+
+    // Ereignis an Google Analytics senden
+    setTimeout(function() {
+        ga('send', 'event', 'Download', buttonText, videoName);
+    }, 100); // Wartezeit von 100 Millisekunden
+
+    // Rest des Codes für den Download des Videos
     var link = document.createElement('a');
     link.href = 'Quelle/' + filename;
     link.download = filename;
