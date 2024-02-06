@@ -203,11 +203,12 @@ padding-bottom: 0px;
 
 document.addEventListener('click', function(event) {
     if (event.target.tagName === 'BUTTON' && event.target.getAttribute('onclick')) {
-        var buttonText = event.target.textContent.trim();
-        var videoName = event.target.getAttribute('onclick').match(/'(.*?)'/)[1];
-        ga('send', 'event', 'Download-Button', buttonText, videoName);
+        var buttonText = event.target.textContent.trim(); // Button-Text extrahieren
+        var videoName = event.target.getAttribute('onclick').match(/'(.*?)'/)[1]; // Name des heruntergeladenen Videos extrahieren
+        ga('send', 'event', buttonText, videoName); // Ereignis an Google Analytics senden
     }
 });
+
 
 
 
