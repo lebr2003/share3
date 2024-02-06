@@ -524,13 +524,19 @@ padding-bottom: 30px;
 
 
     function downloadVideo(filename) {
-      var link = document.createElement('a');
-      link.href = 'Quelle/' + filename;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    var buttonText = 'Download'; // Du kannst den Button-Text statisch festlegen
+    var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
+    ga('send', 'event', buttonText, videoName); // Ereignis an Google Analytics senden
+
+    // Rest des Codes für den Download des Videos
+    var link = document.createElement('a');
+    link.href = 'Quelle/' + filename;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 
 
     function goBack() {
@@ -540,14 +546,6 @@ padding-bottom: 30px;
     window.location.href = 'https://share.leanderbrunar.net';
   }
 }
-
-document.addEventListener('click', function(event) {
-    if (event.target.tagName === 'BUTTON' && event.target.getAttribute('onclick')) {
-        var buttonText = event.target.textContent.trim(); // Button-Text extrahieren
-        var videoName = event.target.getAttribute('onclick').match(/'(.*?)'/)[1]; // Name des heruntergeladenen Videos extrahieren
-        ga('send', 'event', buttonText, videoName); // Ereignis an Google Analytics senden
-    }
-});
 
 
 
