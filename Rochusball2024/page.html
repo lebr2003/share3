@@ -22,6 +22,12 @@
       console.warn('Typekit not loaded.');
     }
     "></script>
+<script type="text/javascript">
+    // Verhindere Rechtsklick
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, false);
+</script>
 <style>
   .video-container {
     display: flex;
