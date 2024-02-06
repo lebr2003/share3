@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular</title>
+    <style>
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input[type="text"],
+        form input[type="number"],
+        form select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        form input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        #finishButton {
+            display: block;
+            margin-top: 10px; /* Abstand zwischen dem letzten Feld und dem Button */
+        }
+    </style>
+</head>
+<body>
+    <form>
+       
+        <label for="fileType">1. Photo, Video oder PDF:</label>
+        <select id="fileType" name="fileType">
+            <option value="photo">Photo (jpg)</option>
+            <option value="video">Video (mp4)</option>
+            <option value="pdf">PDF (pdf)</option>
+        </select>
+
+        <label for="fileName">2. Dateiname ohne Sequenznummer:</label>
+        <input type="text" id="fileName" name="fileName" placeholder="Dateinname_">
+
+        <label for="externalLinkCheckbox">3. externer Downloadlink vorhanden:</label>
+        <input type="checkbox" id="externalLinkCheckbox" name="externalLinkCheckbox" onclick="toggleFields()">
+        <input type="text" id="externalLink" name="externalLink" placeholder="ext. Downloadlink ..." disabled>
+
+        <label for="numberLength">4.1. Anzahl der Dateien:</label>
+        <select id="numberLength" name="numberLength">
+            <option value="single">einstellig</option>
+            <option value="double">zweistellig</option>
+            <option value="triple">dreistellig</option>
+        </select>
+
+        <label for="numberInput">4.2. Anzahl der Dateien (1 bis 300):</label>
+        <input type="number" id="numberInput" name="numberInput" min="1" max="300" oninput="checkNumberInput()">
+
+        <label for="startInput">5. Start der Sequenznummer bzw. ID der ersten Datei:</label>
+        <input type="number" id="startInput" name="startInput" min="1" max="300" oninput="checkFinished()">
+
+        <label for="previewCheckbox">6. Vorschau in geringerer Dateigröße verfügbar:</label>
+        <input type="checkbox" id="previewCheckbox" name="previewCheckbox">
+
+        <!-- "Fertig"-Button unter der letzten Checkbox -->
+        <button id="finishButton" type="button" disabled onclick="generateTxtFile()">Fertig</button>
+
+    </form>
+
+    <script>
+        function toggleFields() {
+            var externalLinkCheckbox = document.getElementById("externalLinkCheckbox");
+            var externalLinkInput = document.getElementById("externalLink");
+            var numberLengthSelect = document.getElementById("numberLength");
+            var numberInput = document.getElementById("numberInput");
+
+            externalLinkInput.disabled = !externalLinkCheckbox.checked;
+            numberLengthSelect.disabled = externalLinkCheckbox.checked;
+            numberInput.disabled = externalLinkCheckbox.checked;
+            
+            // Wenn das Kontrollkästchen für den externen Link nicht aktiviert ist, leere das Feld für den externen Downloadlink
+            if (!externalLinkCheckbox.checked) {
+                externalLinkInput.value = "";
+            }
+            
+            // Wenn das Kontrollkästchen für den externen Link aktiviert ist, ändere die Werte der Felder 4.1. und 4.2.
+            if (externalLinkCheckbox.checked) {
+                numberLengthSelect.value = "single"; // Setze den Wert auf "einstellig"
+                numberInput.value = "1"; // Setze den Wert auf "1"
+            }
+            
+            // Überprüfe, ob das Formular ausgefüllt ist, um den "Fertig"-Button zu aktivieren oder deaktivieren
+            checkFinished();
+        }
+
+        // Stelle sicher, dass die Felder 2 und 5 beim Laden der Seite initialisiert werden
+        window.onload = function() {
+            toggleFields();
+        };
+
+        // Überprüfe die Eingabe im Feld 4.2., um sicherzustellen, dass sie nicht größer als 300 ist
+        function checkNumberInput() {
+            var numberInput = document.getElementById("numberInput");
+            if (numberInput.value > 300) {
+                numberInput.value = 300; // Setze den Wert auf 300, wenn er größer als 300 ist
+            }
+            
+            // Überprüfe, ob das Formular ausgefüllt ist, um den "Fertig"-Button zu aktivieren oder deaktivieren
+            checkFinished();
+        }
+
+        // Überprüfe, ob die Felder 2 und 5 ausgefüllt sind, um den "Fertig"-Button zu aktivieren oder deaktivieren
+        function checkFinished() {
+            var fileNameInput = document.getElementById("fileName");
+            var startInput = document.getElementById("startInput");
+            var finishButton = document.getElementById("finishButton");
+
+            // Aktiviere den "Fertig"-Button, wenn Feld 2 und Feld 5 ausgefüllt sind, sonst deaktiviere ihn
+            if (fileNameInput.value.trim() !== "" && startInput.value.trim() !== "") {
+                finishButton.disabled = false;
+            } else {
+                finishButton.disabled = true;
+            }
+        }
+
+// Funktion zur Generierung des .txt-Dokuments
+function generateTxtFile() {
+    var fileTypeSelect = document.getElementById("fileType");
+    var fileNameInput = document.getElementById("fileName");
+    var externalLinkCheckbox = document.getElementById("externalLinkCheckbox");
+    var externalLink = document.getElementById("externalLink");
+    var startInput = document.getElementById("startInput");
+    var numberInput = document.getElementById("numberInput");
+    var previewCheckbox = document.getElementById("previewCheckbox");
+    var content = "";
+
+    // Bestimme die Länge der Sequenz abhängig von der Auswahl in "numberLength"
+    var sequenceLength = 1; // Standardmäßig einstellig
+    if (document.getElementById("numberLength").value === "double") {
+        sequenceLength = 2; // Zweistellig
+    } else if (document.getElementById("numberLength").value === "triple") {
+        sequenceLength = 3; // Dreistellig
+    }
+
+    // Generiere den Inhalt abhängig vom ausgewählten Dateityp
+    if (fileTypeSelect.value === "photo") {
+        for (var i = 0; i < parseInt(numberInput.value); i++) {
+            var sequence = (parseInt(startInput.value) + i).toString().padStart(sequenceLength, '0');
+            var previewText = previewCheckbox.checked ? "_Vorschau" : "";
+            var downloadLink = fileNameInput.value + "_" + sequence + ".jpg";
+            var imageTag = `<img src="Quelle/${downloadLink}">`;
+            var finalDownloadLink = externalLinkCheckbox.checked ? externalLink.value : downloadLink;
+            if (previewCheckbox.checked) {
+                imageTag = `<img src="Quelle/${downloadLink.replace('.jpg', '_Vorschau.jpg')}">`;
+            }
+            content += `<!-- Foto ${sequence} -->
+<div class="video-wrapper">
+    ${imageTag}
+    <button onclick="downloadVideo('${finalDownloadLink}')">Download</button>
+</div>
+`;
+        }
+    } else if (fileTypeSelect.value === "video") {
+        for (var i = 0; i < parseInt(numberInput.value); i++) {
+            var sequence = (parseInt(startInput.value) + i).toString().padStart(sequenceLength, '0');
+            var previewText = previewCheckbox.checked ? "_Vorschau" : "";
+            var downloadLink = fileNameInput.value + "_" + sequence + ".mp4";
+            var sourceTag = `<source src="Quelle/${downloadLink}" type="video/mp4">`;
+            var finalDownloadLink = externalLinkCheckbox.checked ? externalLink.value : downloadLink;
+            if (previewCheckbox.checked) {
+                sourceTag = `<source src="Quelle/${downloadLink.replace('.mp4', '_Vorschau.mp4')}" type="video/mp4">`;
+            }
+            content += `<!-- Video ${sequence} -->
+<div class="video-wrapper">
+    <video id="video${sequence}" controls>
+        ${sourceTag}
+        Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+    <button onclick="downloadVideo('${finalDownloadLink}')">Download</button>
+</div>
+`;
+        }
+    }
+
+    // Erstelle ein Blob mit dem Inhalt und lade das .txt-Dokument herunter
+    var blob = new Blob([content], { type: 'text/plain' });
+    var anchor = document.createElement('a');
+    anchor.download = 'wrapper.txt';
+    anchor.href = window.URL.createObjectURL(blob);
+    anchor.click();
+}
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
