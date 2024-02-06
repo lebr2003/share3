@@ -32,11 +32,10 @@
 <body>
     <form>
        
-        <label for="fileType">1. Photo, Video oder PDF:</label>
+        <label for="fileType">1. Photo oder Video:</label>
         <select id="fileType" name="fileType">
             <option value="photo">Photo (jpg)</option>
             <option value="video">Video (mp4)</option>
-            <option value="pdf">PDF (pdf)</option>
         </select>
 
         <label for="fileName">2. Dateiname ohne _Sequenznummer:</label>
@@ -62,8 +61,12 @@
         <label for="previewCheckbox">6. Vorschau in geringerer Dateigröße verfügbar:</label>
         <input type="checkbox" id="previewCheckbox" name="previewCheckbox">
 
-        <!-- "Fertig"-Button unter der letzten Checkbox -->
-        <button id="finishButton" type="button" disabled onclick="generateTxtFile()">Fertig</button>
+        <button id="finishButton" type="button" disabled onclick="generateTxtFile()">Wrapper Download</button>
+        <button id="downloadButton" onclick="window.open('https://share.leanderbrunar.net/create/RAW_HTML.txt')" style="margin-top: 10px;">RAW HTML öffnen</button>
+
+
+
+
 
     </form>
 
@@ -208,8 +211,6 @@ function generateTxtFile() {
 
 
 
-
-
     </script>
 </body>
-</html>
+</html
