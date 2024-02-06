@@ -66,6 +66,18 @@ video {
     opacity: 0.8;
   }
 </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VBTEF3MQEQ');
+</script>
+
+
 </head>
   <body class="transition-enabled">    <section class="splash centered e2e-site-content">
       <div class="outer-wrap">
