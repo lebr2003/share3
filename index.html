@@ -177,11 +177,11 @@ padding-bottom: 0px;
 
 
     function redirectToInput() {
-  const inputValue = document.getElementById("redirectInput").value.toLowerCase();
-  if (inputValue) {
-    window.location.href = "/" + inputValue + "/page.html";
-  }
-}
+      const inputValue = document.getElementById("redirectInput").value;
+      if (inputValue) {
+        window.location.href = "/" + inputValue + "/page.html";
+      }
+    }
 
 
     function handleKeyPress(event) {
