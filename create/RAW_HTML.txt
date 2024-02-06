@@ -112,7 +112,7 @@ padding-bottom: 30px;
 
 
          // HIER WRAPPER HINZUFÜGEN
-
+         // nach jedem 3. Wrapper muss ein /div stehen. Danach beginnt ein neuer Container mit div class="video-container"
 
 
           
