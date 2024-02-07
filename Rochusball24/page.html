@@ -528,8 +528,7 @@ function downloadVideo(filename) {
     var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
     // Ereignis an Google Analytics senden
-    gtag('event', 'Download', {
-        'event_category': pageTitle, // Verwende den Seitentitel als Kategorie
+    gtag('event', 'Download_' + pageTitle, {
         'event_label': videoName // Verwende videoName als Label
     });
 
@@ -541,6 +540,7 @@ function downloadVideo(filename) {
     link.click();
     document.body.removeChild(link);
 }
+
 
 
 
