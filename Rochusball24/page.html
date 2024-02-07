@@ -528,9 +528,10 @@ function downloadVideo(filename) {
     var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
 
     // Ereignis an Google Analytics senden
-    setTimeout(function() {
-        ga('send', 'event', 'Download', buttonText, videoName);
-    }, 100); // Wartezeit von 100 Millisekunden
+    gtag('event', 'Download', {
+        'event_category': buttonText,
+        'event_label': videoName
+    });
 
     // Rest des Codes für den Download des Videos
     var link = document.createElement('a');
