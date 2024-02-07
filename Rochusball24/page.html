@@ -524,14 +524,12 @@ padding-bottom: 30px;
 
 
 function downloadVideo(filename) {
-    var buttonText = 'Download'; // Du kannst den Button-Text statisch festlegen
     var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
 
     // Ereignis an Google Analytics senden
     gtag('event', 'Download', {
-    'event_label': videoName
-     });
-
+        'event_label': videoName
+    });
 
     // Rest des Codes für den Download des Videos
     var link = document.createElement('a');
@@ -541,6 +539,7 @@ function downloadVideo(filename) {
     link.click();
     document.body.removeChild(link);
 }
+
 
 
 
