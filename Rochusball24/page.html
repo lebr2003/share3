@@ -528,9 +528,7 @@ function downloadVideo(filename) {
     var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
     // Ereignis an Google Analytics senden
-    gtag('event', 'Download_' + pageTitle, {
-        'Quelle': videoName // Verwende videoName als Label
-    });
+    gtag('event', 'Download_' + pageTitle, videoName);
 
     // Rest des Codes für den Download des Videos
     var link = document.createElement('a');
