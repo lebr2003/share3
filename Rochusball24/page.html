@@ -525,10 +525,12 @@ padding-bottom: 30px;
 
 function downloadVideo(filename) {
     var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
+    var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
     // Ereignis an Google Analytics senden
     gtag('event', 'Download', {
-        'event_label': videoName
+        'event_category': pageTitle, // Verwende den Seitentitel als Kategorie
+        'event_label': videoName // Verwende videoName als Label
     });
 
     // Rest des Codes für den Download des Videos
@@ -539,6 +541,7 @@ function downloadVideo(filename) {
     link.click();
     document.body.removeChild(link);
 }
+
 
 
 
