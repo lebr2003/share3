@@ -1080,13 +1080,13 @@ padding-bottom: 30px;
 
 
 function downloadVideo(filename) {
-    var buttonText = 'Download'; // Du kannst den Button-Text statisch festlegen
     var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
+    var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
     // Ereignis an Google Analytics senden
-    setTimeout(function() {
-        ga('send', 'event', 'Download', buttonText, videoName);
-    }, 100); // Wartezeit von 100 Millisekunden
+    gtag('event', 'Download_' + pageTitle, {
+        'Quelle': videoName // Verwende videoName als Label
+    });
 
     // Rest des Codes für den Download des Videos
     var link = document.createElement('a');
