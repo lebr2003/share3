@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -162,16 +163,16 @@ function generateTxtFile() {
         for (var i = 0; i < parseInt(numberInput.value); i++) {
             var sequence = (parseInt(startInput.value) + i).toString().padStart(sequenceLength, '0');
             var previewText = previewCheckbox.checked ? "_Vorschau" : "";
-            var downloadLink = fileNameInput.value + "_" + sequence + ".jpg";
-            var imageTag = `<img src="Quelle/${downloadLink}">`;
+            var downloadLink = "Quelle/" + fileNameInput.value + "_" + sequence + ".jpg";
+            var imageTag = `<img id="photo${sequence}" src="${downloadLink}">`;
             var finalDownloadLink = externalLinkCheckbox.checked ? externalLink.value : downloadLink;
             if (previewCheckbox.checked) {
-                imageTag = `<img src="Quelle/${downloadLink.replace('.jpg', '_Vorschau.jpg')}">`;
+                imageTag = `<img id="photo${sequence}" src="${downloadLink.replace('.jpg', '_Vorschau.jpg')}">`;
             }
             content += `<!-- Foto ${sequence} -->
 <div class="video-wrapper">
     ${imageTag}
-    <button onclick="downloadVideo('${finalDownloadLink}')">Download</button>
+    <button onclick="downloadFile(this, '${finalDownloadLink}')">Download</button>
 </div>
 `;
             // Überprüfe, ob die Sequenz durch 3 teilbar ist und füge den HTML-Code hinzu
@@ -184,11 +185,11 @@ function generateTxtFile() {
         for (var i = 0; i < parseInt(numberInput.value); i++) {
             var sequence = (parseInt(startInput.value) + i).toString().padStart(sequenceLength, '0');
             var previewText = previewCheckbox.checked ? "_Vorschau" : "";
-            var downloadLink = fileNameInput.value + "_" + sequence + ".mp4";
-            var sourceTag = `<source src="Quelle/${downloadLink}" type="video/mp4">`;
+            var downloadLink = "Quelle/" + fileNameInput.value + "_" + sequence + ".mp4";
+            var sourceTag = `<source src="${downloadLink}" type="video/mp4">`;
             var finalDownloadLink = externalLinkCheckbox.checked ? externalLink.value : downloadLink;
             if (previewCheckbox.checked) {
-                sourceTag = `<source src="Quelle/${downloadLink.replace('.mp4', '_Vorschau.mp4')}" type="video/mp4">`;
+                sourceTag = `<source src="${downloadLink.replace('.mp4', '_Vorschau.mp4')}" type="video/mp4">`;
             }
             content += `<!-- Video ${sequence} -->
 <div class="video-wrapper">
@@ -196,7 +197,7 @@ function generateTxtFile() {
         ${sourceTag}
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('${finalDownloadLink}')">Download</button>
+    <button onclick="downloadFile(this, '${finalDownloadLink}')">Download</button>
 </div>
 `;
             // Überprüfe, ob die Sequenz durch 3 teilbar ist und füge den HTML-Code hinzu
