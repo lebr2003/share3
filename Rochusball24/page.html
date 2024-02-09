@@ -22,6 +22,12 @@
       console.warn('Typekit not loaded.');
     }
     "></script>
+<script type="text/javascript">
+    // Verhindere Rechtsklick
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, false);
+</script>
 <style>
   .video-container {
     display: flex;
@@ -61,7 +67,7 @@ video {
   }
 </style>
 
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -70,7 +76,8 @@ video {
 
   gtag('config', 'G-VBTEF3MQEQ');
 </script>
-  
+
+
 </head>
   <body class="transition-enabled">    <section class="splash centered e2e-site-content">
       <div class="outer-wrap">
@@ -99,7 +106,7 @@ padding-bottom: 30px;
 
 
 
-                   <h1 class="title preserve-whitespace e2e-site-logo-text">Rochusball 2024</h1>
+                   <h1 class="title preserve-whitespace e2e-site-logo-text">Rochusball 2024 - DJ</h1>
 
 
 
@@ -110,342 +117,292 @@ padding-bottom: 30px;
 
 
         <div class="video-container">
-    <!-- Video 1 -->
-    <div class="video-wrapper">
-        <video id="video1" controls>
-            <source src="Quelle/Rochusball24_video_01.mp4" type="video/MP4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <button onclick="downloadVideo('Rochusball24_video_01.mp4')">Download</button>
-    </div>
 
-    <!-- Video 2 -->
-    <div class="video-wrapper">
-        <video id="video2" controls>
-            <source src="Quelle/Rochusball24_video_02.mp4" type="video/MP4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <button onclick="downloadVideo('Rochusball24_video_02.mp4')">Download</button>
-    </div>
 
-    <!-- Video 3 -->
-    <div class="video-wrapper">
-        <video id="video3" controls>
-            <source src="Quelle/Rochusball24_video_03.mp4" type="video/MP4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <button onclick="downloadVideo('Rochusball24_video_03.mp4')">Download</button>
-    </div>
-</div>
-
-        <div class="video-container">
-
-    <!-- Video 4 -->
+<!-- Video 01 -->
 <div class="video-wrapper">
-    <video id="video4" controls>
-        <source src="Quelle/Rochusball24_video_04.mp4" type="video/MP4">
+    <video id="video01" controls>
+        <source src="Quelle/Rochusball24_video_01.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_04.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_01.mp4')">Download</button>
 </div>
-
-<!-- Video 5 -->
+<!-- Video 02 -->
 <div class="video-wrapper">
-    <video id="video5" controls>
-        <source src="Quelle/Rochusball24_video_05.mp4" type="video/MP4">
+    <video id="video02" controls>
+        <source src="Quelle/Rochusball24_video_02.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_05.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_02.mp4')">Download</button>
 </div>
-
-<!-- Video 6 -->
+<!-- Video 03 -->
 <div class="video-wrapper">
-    <video id="video6" controls>
-        <source src="Quelle/Rochusball24_video_06.mp4" type="video/MP4">
+    <video id="video03" controls>
+        <source src="Quelle/Rochusball24_video_03.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_06.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_03.mp4')">Download</button>
 </div>
 </div>
-      <div class="video-container">
-
-<!-- Video 7 -->
+        <div class="video-container"><!-- Video 04 -->
+<div class="video-wrapper">
+    <video id="video04" controls>
+        <source src="Quelle/Rochusball24_video_04.mp4" type="video/mp4">
+        Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_04.mp4')">Download</button>
+</div>
+<!-- Video 05 -->
+<div class="video-wrapper">
+    <video id="video05" controls>
+        <source src="Quelle/Rochusball24_video_05.mp4" type="video/mp4">
+        Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_05.mp4')">Download</button>
+</div>
+<!-- Video 06 -->
+<div class="video-wrapper">
+    <video id="video06" controls>
+        <source src="Quelle/Rochusball24_video_06.mp4" type="video/mp4">
+        Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_06.mp4')">Download</button>
+</div>
+</div>
+        <div class="video-container"><!-- Video 7 -->
 <div class="video-wrapper">
     <video id="video7" controls>
-        <source src="Quelle/Rochusball24_video_07_Vorschau.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_7_Vorschau.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="window.open('https://drive.google.com/uc?export=download&id=10UjjfYC2dgyTzxRW_15CqzqtioW-mHcc')">Download</button>
+    <button onclick="downloadFile(this, 'https://drive.google.com/uc?export=download&id=10UjjfYC2dgyTzxRW_15CqzqtioW-mHcc')">Download</button>
 </div>
-
-<!-- Video 8 -->
+<!-- Video 08 -->
 <div class="video-wrapper">
-    <video id="video8" controls>
-        <source src="Quelle/Rochusball24_video_08.mp4" type="video/MP4">
+    <video id="video08" controls>
+        <source src="Quelle/Rochusball24_video_08.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_08.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_08.mp4')">Download</button>
 </div>
-
-
-<!-- Video 9 -->
+<!-- Video 09 -->
 <div class="video-wrapper">
-    <video id="video9" controls>
-        <source src="Quelle/Rochusball24_video_09.mp4" type="video/MP4">
+    <video id="video09" controls>
+        <source src="Quelle/Rochusball24_video_09.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_09.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_09.mp4')">Download</button>
 </div>
 </div>
-      <div class="video-container">
-
-<!-- Video 10 -->
+        <div class="video-container"><!-- Video 10 -->
 <div class="video-wrapper">
     <video id="video10" controls>
-        <source src="Quelle/Rochusball24_video_10.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_10.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_10.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_10.mp4')">Download</button>
 </div>
-
 <!-- Video 11 -->
 <div class="video-wrapper">
     <video id="video11" controls>
-        <source src="Quelle/Rochusball24_video_11.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_11.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_11.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_11.mp4')">Download</button>
 </div>
-
 <!-- Video 12 -->
 <div class="video-wrapper">
     <video id="video12" controls>
-        <source src="Quelle/Rochusball24_video_12.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_12.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_12.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_12.mp4')">Download</button>
 </div>
 </div>
-      <div class="video-container">
-
-
-<!-- Video 13 -->
+        <div class="video-container"><!-- Video 13 -->
 <div class="video-wrapper">
     <video id="video13" controls>
-        <source src="Quelle/Rochusball24_video_13.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_13.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_13.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_13.mp4')">Download</button>
 </div>
-
-<!-- Video 7 -->
+<!-- Video 14 -->
 <div class="video-wrapper">
-    <video id="video7" controls>
-        <source src="Quelle/Rochusball24_video_14_Vorschau.mp4" type="video/MP4">
+    <video id="video14" controls>
+        <source src="Quelle/Rochusball24_video_14_Vorschau.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="window.open('https://drive.google.com/uc?export=download&id=1OtWE92YuI0vthCYtq21Yq5h7Dtuuw1ni')">Download</button>
+    <button onclick="downloadFile(this, 'https://drive.google.com/uc?export=download&id=1OtWE92YuI0vthCYtq21Yq5h7Dtuuw1ni')">Download</button>
 </div>
-
 <!-- Video 15 -->
 <div class="video-wrapper">
     <video id="video15" controls>
-        <source src="Quelle/Rochusball24_video_15.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_15.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_15.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_15.mp4')">Download</button>
 </div>
 </div>
-      <div class="video-container">
-
-<!-- Video 16 -->
+        <div class="video-container"><!-- Video 16 -->
 <div class="video-wrapper">
     <video id="video16" controls>
-        <source src="Quelle/Rochusball24_video_16.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_16.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_16.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_16.mp4')">Download</button>
 </div>
-
-
 <!-- Video 17 -->
 <div class="video-wrapper">
     <video id="video17" controls>
-        <source src="Quelle/Rochusball24_video_17.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_17.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_17.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_17.mp4')">Download</button>
 </div>
-
 <!-- Video 18 -->
 <div class="video-wrapper">
     <video id="video18" controls>
-        <source src="Quelle/Rochusball24_video_18.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_18.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_18.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_18.mp4')">Download</button>
 </div>
 </div>
-      <div class="video-container">
-
-<!-- Video 19 -->
+        <div class="video-container"><!-- Video 19 -->
 <div class="video-wrapper">
     <video id="video19" controls>
-        <source src="Quelle/Rochusball24_video_19.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_19.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_19.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_19.mp4')">Download</button>
 </div>
-
 <!-- Video 20 -->
 <div class="video-wrapper">
     <video id="video20" controls>
-        <source src="Quelle/Rochusball24_video_20.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_20.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_20.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_20.mp4')">Download</button>
 </div>
-
-
 <!-- Video 21 -->
 <div class="video-wrapper">
     <video id="video21" controls>
-        <source src="Quelle/Rochusball24_video_21.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_21.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_21.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_21.mp4')">Download</button>
 </div>
 </div>
-      <div class="video-container">
-
-<!-- Video 22 -->
+        <div class="video-container"><!-- Video 22 -->
 <div class="video-wrapper">
     <video id="video22" controls>
-        <source src="Quelle/Rochusball24_video_22.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_22.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_22.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_22.mp4')">Download</button>
 </div>
-
 <!-- Video 23 -->
 <div class="video-wrapper">
     <video id="video23" controls>
-        <source src="Quelle/Rochusball24_video_23.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_23.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_23.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_23.mp4')">Download</button>
 </div>
-
 <!-- Video 24 -->
 <div class="video-wrapper">
     <video id="video24" controls>
-        <source src="Quelle/Rochusball24_video_24.mp4" type="video/MP4">
+        <source src="Quelle/Rochusball24_video_24.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <button onclick="downloadVideo('Rochusball24_video_24.mp4')">Download</button>
+    <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_24.mp4')">Download</button>
 </div>
 </div>
-     <div class="video-container">
-
-<!-- Foto 1 -->
+        <div class="video-container">
+<!-- Foto 01 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_01.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_01.jpg')">Download</button>
+    <img id="photo01" src="Quelle/Rochusball_2024_DJzus_01.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_01.jpg')">Download</button>
 </div>
-
-<!-- Foto 2 -->
+<!-- Foto 02 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_02.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_02.jpg')">Download</button>
+    <img id="photo02" src="Quelle/Rochusball_2024_DJzus_02.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_02.jpg')">Download</button>
 </div>
-
-<!-- Foto 3 -->
+<!-- Foto 03 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_03.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_03.jpg')">Download</button>
+    <img id="photo03" src="Quelle/Rochusball_2024_DJzus_03.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_03.jpg')">Download</button>
 </div>
 </div>
-     <div class="video-container">
-
-<!-- Foto 4 -->
+        <div class="video-container"><!-- Foto 04 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_04.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_04.jpg')">Download</button>
+    <img id="photo04" src="Quelle/Rochusball_2024_DJzus_04.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_04.jpg')">Download</button>
 </div>
-
-<!-- Foto 5 -->
+<!-- Foto 05 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_05.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_05.jpg')">Download</button>
+    <img id="photo05" src="Quelle/Rochusball_2024_DJzus_05.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_05.jpg')">Download</button>
 </div>
-
-<!-- Foto 6 -->
+<!-- Foto 06 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_06.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_06.jpg')">Download</button>
+    <img id="photo06" src="Quelle/Rochusball_2024_DJzus_06.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_06.jpg')">Download</button>
 </div>
 </div>
-     <div class="video-container">
-
-<!-- Foto 7 -->
+        <div class="video-container"><!-- Foto 07 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_07.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_07.jpg')">Download</button>
+    <img id="photo07" src="Quelle/Rochusball_2024_DJzus_07.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_07.jpg')">Download</button>
 </div>
-
-<!-- Foto 8 -->
+<!-- Foto 08 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_08.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_08.jpg')">Download</button>
+    <img id="photo08" src="Quelle/Rochusball_2024_DJzus_08.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_08.jpg')">Download</button>
 </div>
-
-<!-- Foto 9 -->
+<!-- Foto 09 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_09.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_09.jpg')">Download</button>
+    <img id="photo09" src="Quelle/Rochusball_2024_DJzus_09.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_09.jpg')">Download</button>
 </div>
 </div>
-     <div class="video-container">
-
-<!-- Foto 10 -->
+        <div class="video-container"><!-- Foto 10 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_10.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_10.jpg')">Download</button>
+    <img id="photo10" src="Quelle/Rochusball_2024_DJzus_10.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_10.jpg')">Download</button>
 </div>
-
 <!-- Foto 11 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_11.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_11.jpg')">Download</button>
+    <img id="photo11" src="Quelle/Rochusball_2024_DJzus_11.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_11.jpg')">Download</button>
 </div>
-
 <!-- Foto 12 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_12.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_12.jpg')">Download</button>
+    <img id="photo12" src="Quelle/Rochusball_2024_DJzus_12.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_12.jpg')">Download</button>
 </div>
 </div>
-     <div class="video-container">
-
-<!-- Foto 13 -->
+        <div class="video-container"><!-- Foto 13 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_13.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_13.jpg')">Download</button>
+    <img id="photo13" src="Quelle/Rochusball_2024_DJzus_13.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_13.jpg')">Download</button>
 </div>
-
 <!-- Foto 14 -->
 <div class="video-wrapper">
-    <img src="Quelle/Rochusball_2024_DJzus_14.jpg">
-    <button onclick="downloadVideo('Rochusball_2024_DJzus_14.jpg')">Download</button>
+    <img id="photo14" src="Quelle/Rochusball_2024_DJzus_14.jpg">
+    <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_14.jpg')">Download</button>
 </div>
-</div>
 
 
 
+          
 
 
-
-
+          
+         </div>
+      
 
 
 
@@ -521,38 +478,31 @@ padding-bottom: 30px;
     if (e.persisted) { window.location.reload(); }
   };
 
-
-
-function downloadVideo(filename) {
-    var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
+function downloadFile(button, filename) {
+    var element = button.previousElementSibling; // Zugriff auf das vorherige Element
+    var name = element.id; // Die ID des Elements als Dateiname verwenden
     var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
     // Ereignis an Google Analytics senden
     gtag('event', 'Download_' + pageTitle, {
-        'Quelle': videoName // Verwende videoName als Label
+        'Quelle': name // Verwende die ID des Elements als Label
     });
 
-    // Rest des Codes für den Download des Videos
+    // Rest des Codes für den Download der Datei
     var link = document.createElement('a');
-    link.href = 'Quelle/' + filename;
-    link.download = 'filename';
+    link.href = filename;
+    link.download = '';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 }
 
-
-
-
-
-
-
-    function goBack() {
-  if (window.history.length > 1) {
-    window.history.back();
-  } else {
-    window.location.href = 'https://share.leanderbrunar.net';
-  }
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = 'https://share.leanderbrunar.net';
+    }
 }
 
 
@@ -561,5 +511,4 @@ function downloadVideo(filename) {
 
 
 </script>
-  
 </html>
