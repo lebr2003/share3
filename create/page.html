@@ -87,11 +87,9 @@
         function toggleFields() {
             var externalLinkCheckbox = document.getElementById("externalLinkCheckbox");
             var externalLinkInput = document.getElementById("externalLink");
-            var numberLengthSelect = document.getElementById("numberLength");
             var numberInput = document.getElementById("numberInput");
 
             externalLinkInput.disabled = !externalLinkCheckbox.checked;
-            numberLengthSelect.disabled = externalLinkCheckbox.checked;
             numberInput.disabled = externalLinkCheckbox.checked;
             
             // Wenn das Kontrollkästchen für den externen Link nicht aktiviert ist, leere das Feld für den externen Downloadlink
@@ -99,9 +97,8 @@
                 externalLinkInput.value = "";
             }
             
-            // Wenn das Kontrollkästchen für den externen Link aktiviert ist, ändere die Werte der Felder 4.1. und 4.2.
+            // Wenn das Kontrollkästchen für den externen Link aktiviert ist, ändere die Werte des Feldes 4.2.
             if (externalLinkCheckbox.checked) {
-                numberLengthSelect.value = "single"; // Setze den Wert auf "einstellig"
                 numberInput.value = "1"; // Setze den Wert auf "1"
             }
             
