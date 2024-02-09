@@ -535,7 +535,7 @@ function downloadVideo(filename) {
     // Rest des Codes für den Download des Videos
     var link = document.createElement('a');
     link.href = 'Quelle/' + filename;
-    link.download = filename;
+    link.download = '';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
