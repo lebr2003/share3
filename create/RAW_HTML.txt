@@ -208,19 +208,20 @@ padding-bottom: 30px;
     if (e.persisted) { window.location.reload(); }
   };
 
-function downloadVideo(filename) {
-    var videoName = filename; // Der Dateiname wird direkt aus dem Parameter der Funktion extrahiert
+function downloadFile(button, filename) {
+    var element = button.previousElementSibling; // Zugriff auf das vorherige Element
+    var name = element.id; // Die ID des Elements als Dateiname verwenden
     var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
     // Ereignis an Google Analytics senden
     gtag('event', 'Download_' + pageTitle, {
-        'Quelle': videoName // Verwende videoName als Label
+        'Quelle': name // Verwende die ID des Elements als Label
     });
 
-    // Rest des Codes für den Download des Videos
+    // Rest des Codes für den Download der Datei
     var link = document.createElement('a');
-    link.href = 'Quelle/' + filename;
-    link.download = filename;
+    link.href = filename;
+    link.download = '';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
