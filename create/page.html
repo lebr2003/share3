@@ -174,10 +174,10 @@ function generateContent() {
             var sequence = (parseInt(startInput.value) + i).toString().padStart(sequenceLength, '0');
             var previewText = previewCheckbox.checked ? "_Vorschau" : "";
             var downloadLink = "Quelle/" + fileNameInput.value + "_" + sequence + ".jpg";
-            var imageTag = `<img id="photo${sequence}" src="${downloadLink}">`;
+            var imageTag = `<img id="photo${sequence}" src="${downloadLink}" onclick="openPopup('${downloadLink}')">`;
             var finalDownloadLink = externalLinkCheckbox.checked ? externalLink.value : downloadLink;
             if (previewCheckbox.checked) {
-                imageTag = `<img id="photo${sequence}" src="${downloadLink.replace('.jpg', '_Vorschau.jpg')}">`;
+                imageTag = `<img id="photo${sequence}" src="${downloadLink.replace('.jpg', '_Vorschau.jpg')}"  onclick="openPopup('${downloadLink.replace('.jpg', '_Vorschau.jpg')}')">`;
             }
             content += `<!-- Foto ${sequence} -->
 <div class="video-wrapper">
