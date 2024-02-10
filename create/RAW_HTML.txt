@@ -41,6 +41,9 @@
   width: 400px;
   position: relative;
 }
+.video-wrapper img {
+    cursor: zoom-in; /* Vergrößerungslupe nur für Bilder */
+}
 video {
       width: 100%;
       max-width: 100%; /* Volle Breite innerhalb des Containers */
@@ -61,10 +64,66 @@ video {
     margin-top: 10px;
     margin-bottom: 30px;
   }
-
   button:hover {
     opacity: 0.8;
   }
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Weiß mit 80% Deckkraft */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.popup img {
+    max-width: 100%; /* Maximale Breite des Bildes auf 100% der Popup-Breite begrenzen */
+    max-height: 100%; /* Maximale Höhe des Bildes auf 100% der Popup-Höhe begrenzen */
+    width: auto; /* Automatische Breite basierend auf dem Inhalt */
+    height: auto; /* Automatische Höhe basierend auf dem Inhalt */
+    object-fit: contain; /* Bild an den verfügbaren Platz anpassen */
+}
+.close {
+    color: #aaaaaa;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.navigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px; /* Einrücken der Schaltflächen um 20px */
+    z-index: 999;
+}
+.navigation button {
+    padding: 110px; /* Standardpolsterung für die Schaltflächen */
+    background-color: transparent; /* Transparenter Hintergrund */
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Übergangseffekt für Deckkraft */
+    opacity: 0.5; /* Deckkraft standardmäßig auf 50% */
+    width: 350px; /* Breite der Schaltflächen erhöhen */
+    height: 350px; /* Höhe der Schaltflächen erhöhen */
+}
+.navigation button:hover {
+    opacity: 0.8; /* Deckkraft bei Hover auf 80% erhöhen */
+}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -124,11 +183,24 @@ padding-bottom: 30px;
 
 
          </div>
-      
 
 
 
 
+
+
+
+<!-- Popup Container -->
+<div id="popupContainer" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+
+    <img id="popupImage" src="" alt="Popup Bild">
+
+    <div class="navigation">
+        <button onclick="prevImage()"><img src="https://share.leanderbrunar.net/left-arrow.png" alt="Zurück"></button>
+        <button onclick="nextImage()"><img src="https://share.leanderbrunar.net/right-arrow.png" alt="Weiter"></button>
+    </div>
+</div>
 
               
 <div class="js-project-module project-module module button project-module-button" data-id="m60a38458a63c7a0e069f3511ffb24857dbbb23a35c51eda57d32e" style="padding-top: 40px; padding-bottom: 0px;">
@@ -227,6 +299,57 @@ function goBack() {
     }
 }
 
+var images = []; // Array zum Speichern der Bild-URLs
+var currentIndex = 0; // Index des aktuellen Bildes
+
+// Funktion, um das Popup zu öffnen und das Bild anzuzeigen
+function openPopup(imageUrl) {
+    var popup = document.getElementById('popupContainer');
+    var popupImage = document.getElementById('popupImage');
+    popupImage.src = imageUrl; // Bildquelle für das Popup setzen
+    popup.style.display = 'flex'; // Popup anzeigen
+    currentIndex = images.indexOf(imageUrl); // Index des aktuellen Bildes aktualisieren
+}
+
+// Funktion, um das Popup zu schließen
+function closePopup() {
+    var popup = document.getElementById('popupContainer');
+    popup.style.display = 'none'; // Popup ausblenden
+}
+
+// Funktion zum Anzeigen des vorherigen Bildes
+function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    var popupImage = document.getElementById('popupImage');
+    popupImage.src = images[currentIndex];
+}
+
+// Funktion zum Anzeigen des nächsten Bildes
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    var popupImage = document.getElementById('popupImage');
+    popupImage.src = images[currentIndex];
+}
+
+
+// Aktualisiere die Bild-URLs im images-Array
+document.querySelectorAll('.video-wrapper img').forEach(function(img) {
+    images.push(img.src);
+});
+
+// Ereignislistener für Tastendruck
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        // Wenn die ESC-Taste gedrückt wird, schließe das Popup
+        closePopup();
+    } else if (event.key === 'ArrowLeft') {
+        // Wenn die linke Pfeiltaste gedrückt wird, zeige das vorherige Bild an
+        prevImage();
+    } else if (event.key === 'ArrowRight') {
+        // Wenn die rechte Pfeiltaste gedrückt wird, zeige das nächste Bild an
+        nextImage();
+    }
+});
 
 
 
