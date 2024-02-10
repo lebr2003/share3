@@ -15,6 +15,7 @@
 
 
 
+
     <script type="text/javascript" src="https://use.typekit.net/ik/DAFcdHHE1qRRSJJi-hckCuopTISzUT2E2blBinmi4vGfeGMffHYEBsJzwD9oFDIDWDJUZ28KZc4yFcIUweZRwQMDZRiyF2mRZAZyZAJ3ZQMoFDb3ZRsqjD6-q3I7OcU8jAoqZW4KS1m0jWJ0dcmXOfG0dW83da4XZcNC-Av0jhNlOfG0SY4zwKuh-AmaOcuoSeNkieZzde8zOcFzdPUCZAB0Zemkj14udcBkOco8ifUlpWgzS1scdhUTdkoRdhXCSY4zwKuh-AmaOcuoSeNkieZzde8zOcFzdPUaiaS0demydcs8Sc4kiAoySKo0ZWbKgeZXdcCKgYFGpcw7fbKImsMMeMb6MKG4fJBmIMMjgkMfH6GJ8HbfIMIjgfMfqMeJzzKBg6.js?cb=47a664330854441e7fc00a8c3e7b38610e6a2e05" async onload="
     try {
       window.Typekit.load();
@@ -41,6 +42,9 @@
   width: 400px;
   position: relative;
 }
+.video-wrapper img {
+    cursor: zoom-in; /* Vergrößerungslupe nur für Bilder */
+}
 video {
       width: 100%;
       max-width: 100%; /* Volle Breite innerhalb des Containers */
@@ -61,10 +65,66 @@ video {
     margin-top: 10px;
     margin-bottom: 30px;
   }
-
   button:hover {
     opacity: 0.8;
   }
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Weiß mit 80% Deckkraft */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.popup img {
+    max-width: 100%; /* Maximale Breite des Bildes auf 100% der Popup-Breite begrenzen */
+    max-height: 100%; /* Maximale Höhe des Bildes auf 100% der Popup-Höhe begrenzen */
+    width: auto; /* Automatische Breite basierend auf dem Inhalt */
+    height: auto; /* Automatische Höhe basierend auf dem Inhalt */
+    object-fit: contain; /* Bild an den verfügbaren Platz anpassen */
+}
+.close {
+    color: #aaaaaa;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.navigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px; /* Einrücken der Schaltflächen um 20px */
+    z-index: 999;
+}
+.navigation button {
+    padding: 110px; /* Standardpolsterung für die Schaltflächen */
+    background-color: transparent; /* Transparenter Hintergrund */
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Übergangseffekt für Deckkraft */
+    opacity: 0.5; /* Deckkraft standardmäßig auf 50% */
+    width: 350px; /* Breite der Schaltflächen erhöhen */
+    height: 350px; /* Höhe der Schaltflächen erhöhen */
+}
+.navigation button:hover {
+    opacity: 0.8; /* Deckkraft bei Hover auf 80% erhöhen */
+}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -104,9 +164,10 @@ padding-bottom: 30px;
         <header class="page-header content" data-context="pages" data-identity="id:p65c0d05aa37393bcfe8ba3a1352692c9560a9dd8e44b012b07a94" data-hover-hint="pageHeader" data-hover-hint-id="p65c0d05aa37393bcfe8ba3a1352692c9560a9dd8e44b012b07a94">
 
 
-
-
                    <h1 class="title preserve-whitespace e2e-site-logo-text">Rochusball 2024 - DJ</h1>
+
+
+
 
 
 
@@ -117,8 +178,6 @@ padding-bottom: 30px;
 
 
         <div class="video-container">
-
-
 <!-- Video 01 -->
 <div class="video-wrapper">
     <video id="video01" controls>
@@ -169,9 +228,9 @@ padding-bottom: 30px;
     <button onclick="downloadFile(this, 'Quelle/Rochusball24_video_06.mp4')">Download</button>
 </div>
 </div>
-        <div class="video-container"><!-- Video 7 -->
+        <div class="video-container"><!-- Video 07 -->
 <div class="video-wrapper">
-    <video id="video7" controls>
+    <video id="video07" controls>
         <source src="Quelle/Rochusball24_video_07_Vorschau.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
@@ -322,91 +381,104 @@ padding-bottom: 30px;
         <div class="video-container">
 <!-- Foto 01 -->
 <div class="video-wrapper">
-    <img id="photo01" src="Quelle/Rochusball_2024_DJzus_01.jpg">
+    <img id="photo01" src="Quelle/Rochusball_2024_DJzus_01.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_01.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_01.jpg')">Download</button>
 </div>
 <!-- Foto 02 -->
 <div class="video-wrapper">
-    <img id="photo02" src="Quelle/Rochusball_2024_DJzus_02.jpg">
+    <img id="photo02" src="Quelle/Rochusball_2024_DJzus_02.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_02.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_02.jpg')">Download</button>
 </div>
 <!-- Foto 03 -->
 <div class="video-wrapper">
-    <img id="photo03" src="Quelle/Rochusball_2024_DJzus_03.jpg">
+    <img id="photo03" src="Quelle/Rochusball_2024_DJzus_03.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_03.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_03.jpg')">Download</button>
 </div>
 </div>
         <div class="video-container"><!-- Foto 04 -->
 <div class="video-wrapper">
-    <img id="photo04" src="Quelle/Rochusball_2024_DJzus_04.jpg">
+    <img id="photo04" src="Quelle/Rochusball_2024_DJzus_04.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_04.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_04.jpg')">Download</button>
 </div>
 <!-- Foto 05 -->
 <div class="video-wrapper">
-    <img id="photo05" src="Quelle/Rochusball_2024_DJzus_05.jpg">
+    <img id="photo05" src="Quelle/Rochusball_2024_DJzus_05.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_05.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_05.jpg')">Download</button>
 </div>
 <!-- Foto 06 -->
 <div class="video-wrapper">
-    <img id="photo06" src="Quelle/Rochusball_2024_DJzus_06.jpg">
+    <img id="photo06" src="Quelle/Rochusball_2024_DJzus_06.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_06.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_06.jpg')">Download</button>
 </div>
 </div>
         <div class="video-container"><!-- Foto 07 -->
 <div class="video-wrapper">
-    <img id="photo07" src="Quelle/Rochusball_2024_DJzus_07.jpg">
+    <img id="photo07" src="Quelle/Rochusball_2024_DJzus_07.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_07.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_07.jpg')">Download</button>
 </div>
 <!-- Foto 08 -->
 <div class="video-wrapper">
-    <img id="photo08" src="Quelle/Rochusball_2024_DJzus_08.jpg">
+    <img id="photo08" src="Quelle/Rochusball_2024_DJzus_08.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_08.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_08.jpg')">Download</button>
 </div>
 <!-- Foto 09 -->
 <div class="video-wrapper">
-    <img id="photo09" src="Quelle/Rochusball_2024_DJzus_09.jpg">
+    <img id="photo09" src="Quelle/Rochusball_2024_DJzus_09.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_09.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_09.jpg')">Download</button>
 </div>
 </div>
         <div class="video-container"><!-- Foto 10 -->
 <div class="video-wrapper">
-    <img id="photo10" src="Quelle/Rochusball_2024_DJzus_10.jpg">
+    <img id="photo10" src="Quelle/Rochusball_2024_DJzus_10.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_10.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_10.jpg')">Download</button>
 </div>
 <!-- Foto 11 -->
 <div class="video-wrapper">
-    <img id="photo11" src="Quelle/Rochusball_2024_DJzus_11.jpg">
+    <img id="photo11" src="Quelle/Rochusball_2024_DJzus_11.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_11.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_11.jpg')">Download</button>
 </div>
 <!-- Foto 12 -->
 <div class="video-wrapper">
-    <img id="photo12" src="Quelle/Rochusball_2024_DJzus_12.jpg">
+    <img id="photo12" src="Quelle/Rochusball_2024_DJzus_12.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_12.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_12.jpg')">Download</button>
 </div>
 </div>
         <div class="video-container"><!-- Foto 13 -->
 <div class="video-wrapper">
-    <img id="photo13" src="Quelle/Rochusball_2024_DJzus_13.jpg">
+    <img id="photo13" src="Quelle/Rochusball_2024_DJzus_13.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_13.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_13.jpg')">Download</button>
 </div>
 <!-- Foto 14 -->
 <div class="video-wrapper">
-    <img id="photo14" src="Quelle/Rochusball_2024_DJzus_14.jpg">
+    <img id="photo14" src="Quelle/Rochusball_2024_DJzus_14.jpg" onclick="openPopup('Quelle/Rochusball_2024_DJzus_14.jpg')">
     <button onclick="downloadFile(this, 'Quelle/Rochusball_2024_DJzus_14.jpg')">Download</button>
 </div>
 
 
 
-          
 
 
-          
+
+
          </div>
-      
 
 
 
 
+
+
+
+<!-- Popup Container -->
+<div id="popupContainer" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+
+    <img id="popupImage" src="" alt="Popup Bild">
+
+    <div class="navigation">
+        <button onclick="prevImage()"><img src="https://share.leanderbrunar.net/left-arrow.png" alt="Zurück"></button>
+        <button onclick="nextImage()"><img src="https://share.leanderbrunar.net/right-arrow.png" alt="Weiter"></button>
+    </div>
+</div>
 
               
 <div class="js-project-module project-module module button project-module-button" data-id="m60a38458a63c7a0e069f3511ffb24857dbbb23a35c51eda57d32e" style="padding-top: 40px; padding-bottom: 0px;">
@@ -505,6 +577,57 @@ function goBack() {
     }
 }
 
+var images = []; // Array zum Speichern der Bild-URLs
+var currentIndex = 0; // Index des aktuellen Bildes
+
+// Funktion, um das Popup zu öffnen und das Bild anzuzeigen
+function openPopup(imageUrl) {
+    var popup = document.getElementById('popupContainer');
+    var popupImage = document.getElementById('popupImage');
+    popupImage.src = imageUrl; // Bildquelle für das Popup setzen
+    popup.style.display = 'flex'; // Popup anzeigen
+    currentIndex = images.indexOf(imageUrl); // Index des aktuellen Bildes aktualisieren
+}
+
+// Funktion, um das Popup zu schließen
+function closePopup() {
+    var popup = document.getElementById('popupContainer');
+    popup.style.display = 'none'; // Popup ausblenden
+}
+
+// Funktion zum Anzeigen des vorherigen Bildes
+function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    var popupImage = document.getElementById('popupImage');
+    popupImage.src = images[currentIndex];
+}
+
+// Funktion zum Anzeigen des nächsten Bildes
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    var popupImage = document.getElementById('popupImage');
+    popupImage.src = images[currentIndex];
+}
+
+
+// Aktualisiere die Bild-URLs im images-Array
+document.querySelectorAll('.video-wrapper img').forEach(function(img) {
+    images.push(img.src);
+});
+
+// Ereignislistener für Tastendruck
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        // Wenn die ESC-Taste gedrückt wird, schließe das Popup
+        closePopup();
+    } else if (event.key === 'ArrowLeft') {
+        // Wenn die linke Pfeiltaste gedrückt wird, zeige das vorherige Bild an
+        prevImage();
+    } else if (event.key === 'ArrowRight') {
+        // Wenn die rechte Pfeiltaste gedrückt wird, zeige das nächste Bild an
+        nextImage();
+    }
+});
 
 
 
