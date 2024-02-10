@@ -5,32 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Wrapper</title>
-    <style>
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        form input[type="text"],
-        form input[type="number"],
-        form select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-        form input[type="checkbox"] {
-            margin-right: 5px;
-        }
-        #finishButton {
-            display: block;
-            margin-top: 10px; /* Abstand zwischen dem letzten Feld und dem Button */
-        }
-    </style>
+<style>
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    form label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    form input[type="text"],
+    form input[type="number"],
+    form select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    form input[type="checkbox"] {
+        margin-right: 5px;
+    }
+    /* Stil für die Button-Elemente */
+    button {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px; /* Abstand zwischen den Buttons */
+    }
+</style>
 
-    <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -40,46 +42,45 @@
   gtag('config', 'G-VBTEF3MQEQ');
 </script>
 
-    
 </head>
 <body>
     <form>
+
+        <label for="pageName">1. Name der Seite:</label>
+        <input type="text" id="pageName" name="pageName" placeholder="Seitenname">
        
-        <label for="fileType">1. Photo oder Video:</label>
+        <label for="fileType">2. Photo oder Video:</label>
         <select id="fileType" name="fileType">
             <option value="photo">Photo (jpg)</option>
             <option value="video">Video (mp4)</option>
         </select>
 
-        <label for="fileName">2. Dateiname ohne _Sequenznummer:</label>
+        <label for="fileName">3. Dateiname ohne _Sequenznummer:</label>
         <input type="text" id="fileName" name="fileName" placeholder="Dateinname">
 
-        <label for="externalLinkCheckbox">3. externer Downloadlink vorhanden:</label>
+        <label for="externalLinkCheckbox">4. externer Downloadlink vorhanden:</label>
         <input type="checkbox" id="externalLinkCheckbox" name="externalLinkCheckbox" onclick="toggleFields()">
         <input type="text" id="externalLink" name="externalLink" placeholder="ext. Downloadlink" disabled>
 
-        <label for="numberLength">4.1. Anzahl der Dateien:</label>
+        <label for="numberLength">5.1. Anzahl der Dateien:</label>
         <select id="numberLength" name="numberLength">
             <option value="single">einstellig</option>
             <option value="double">zweistellig</option>
             <option value="triple">dreistellig</option>
         </select>
 
-        <label for="numberInput">4.2. Anzahl der Dateien (1 bis 300):</label>
+        <label for="numberInput">5.2. Anzahl der Dateien (1 bis 300):</label>
         <input type="number" id="numberInput" name="numberInput" min="1" max="300" oninput="checkNumberInput()">
 
-        <label for="startInput">5. Start der Sequenznummer bzw. ID der ersten Datei:</label>
+        <label for="startInput">6. Start der Sequenznummer bzw. ID der ersten Datei:</label>
         <input type="number" id="startInput" name="startInput" min="1" max="300" oninput="checkFinished()">
 
-        <label for="previewCheckbox">6. Vorschau in geringerer Dateigröße verfügbar:</label>
+        <label for="previewCheckbox">7. Vorschau in geringerer Dateigröße verfügbar:</label>
         <input type="checkbox" id="previewCheckbox" name="previewCheckbox">
 
-        <button id="finishButton" type="button" disabled onclick="generateTxtFile()">Wrapper Download</button>
-        <button id="downloadButton" onclick="window.open('https://share.leanderbrunar.net/create/RAW_HTML.txt')" style="margin-top: 10px;">RAW HTML öffnen</button>
-
-
-
-
+        <button id="wrapperButton" type="button" disabled onclick="generateTxtFile()">Wrapper Download</button>
+        <button id="htmlButton" type="button" onclick="updateExistingFile()">HTML Download</button>
+        <button id="rawButton" onclick="window.open('https://share.leanderbrunar.net/create/RAW_HTML.txt')">RAW HTML öffnen</button>
 
     </form>
 
@@ -122,22 +123,34 @@
             checkFinished();
         }
 
-        // Überprüfe, ob die Felder 2 und 5 ausgefüllt sind, um den "Fertig"-Button zu aktivieren oder deaktivieren
-        function checkFinished() {
-            var fileNameInput = document.getElementById("fileName");
-            var startInput = document.getElementById("startInput");
-            var finishButton = document.getElementById("finishButton");
+// Überprüfe, ob die Felder 1, 3 und 6 ausgefüllt sind
+function checkFinished() {
+    var pageNameInput = document.getElementById("pageName");
+    var fileNameInput = document.getElementById("fileName");
+    var startInput = document.getElementById("startInput");
+    var wrapperButton = document.getElementById("wrapperButton");
+    var htmlButton = document.getElementById("htmlButton");
 
-            // Aktiviere den "Fertig"-Button, wenn Feld 2 und Feld 5 ausgefüllt sind, sonst deaktiviere ihn
-            if (fileNameInput.value.trim() !== "" && startInput.value.trim() !== "") {
-                finishButton.disabled = false;
-            } else {
-                finishButton.disabled = true;
-            }
-        }
+    // Aktiviere den "Wrapper"-Button, wenn Feld 3 und Feld 6 ausgefüllt sind, sonst deaktiviere ihn
+    if (fileNameInput.value.trim() !== "" && startInput.value.trim() !== "") {
+        wrapperButton.disabled = false;
+    } else {
+        wrapperButton.disabled = true;
+    }
 
-// Funktion zur Generierung des .txt-Dokuments
-function generateTxtFile() {
+    // Aktiviere den "HTML"-Button, wenn Feld 1, Feld 3 und Feld 6 ausgefüllt sind, sonst deaktiviere ihn
+    if (pageNameInput.value.trim() !== "" && fileNameInput.value.trim() !== "" && startInput.value.trim() !== "") {
+        htmlButton.disabled = false;
+    } else {
+        htmlButton.disabled = true;
+    }
+}
+
+
+
+
+// Funktion zum Generieren des Wrappers
+function generateContent() {
     var fileTypeSelect = document.getElementById("fileType");
     var fileNameInput = document.getElementById("fileName");
     var externalLinkCheckbox = document.getElementById("externalLinkCheckbox");
@@ -204,6 +217,35 @@ function generateTxtFile() {
             }
         }
     }
+    return content;
+}
+
+
+// Funktion zum Generieren des Titles
+function generateTitle() {
+    var pageNameInput = document.getElementById("pageName").value;
+    var contentTitle = "";
+
+    contentTitle += `                   <title>${pageNameInput}</title>`;
+
+    return contentTitle;
+}
+
+
+// Funktion zum Generieren der Überschrift
+function generateHeader() {
+    var pageNameInput = document.getElementById("pageName").value;
+    var contentHeader = "";
+
+    // Hier wird die Überschrift mit einer H1-Tags erstellt
+    contentHeader += `                   <h1 class="title preserve-whitespace e2e-site-logo-text">${pageNameInput}</h1>`;
+
+    return contentHeader;
+}
+
+// Funktion für Wrapper-Download
+function generateTxtFile() {
+    var content = generateContent();
 
     // Erstelle ein Blob mit dem Inhalt und lade das .txt-Dokument herunter
     var blob = new Blob([content], { type: 'text/plain' });
@@ -212,6 +254,52 @@ function generateTxtFile() {
     anchor.href = window.URL.createObjectURL(blob);
     anchor.click();
 }
+
+// Funktion für HTML-Download
+function updateExistingFile() {
+    var content = generateContent();
+    var contentTitle = generateTitle();
+    var contentHeader = generateHeader();
+
+
+
+    // URL zur vorgefertigten Textdatei
+    var existingFileURL = 'https://share.leanderbrunar.net/create/RAW_HTML.txt';
+    
+    // Zeilennummer, an der der generierte Text eingefügt werden soll
+    var lineNumberWrapper = 124; // generierter Wrapper Text wird in Zeile 124 eingefügt
+    var lineNumberTitle = 14; // generierter Title Text wird in Zeile 14 eingefügt
+    var lineNumberHeader = 109; // generierter Überschrift Text wird in Zeile 109 eingefügt
+
+    // Abrufen der vorgefertigten Textdatei über Fetch API
+    fetch(existingFileURL)
+        .then(response => response.text())
+        .then(existingContent => {
+            // Aufteilen des vorhandenen Inhalts in Zeilen
+            var lines = existingContent.split('\n');
+
+            // Einfügen des generierten Inhalts an der gewünschten Zeilennummer
+            lines.splice(lineNumberTitle - 1, 0, contentTitle);
+            lines.splice(lineNumberHeader - 1, 0, contentHeader);
+            lines.splice(lineNumberWrapper - 1, 0, content);
+
+            // Zusammenfügen der Zeilen zu aktualisiertem Inhalt
+            var updatedContent = lines.join('\n');
+            // Herunterladen der aktualisierten Datei
+            var blob = new Blob([updatedContent], { type: 'text/plain' });
+            var anchor = document.createElement('a');
+            anchor.download = 'html.txt'; // Dateiname für die heruntergeladene Datei
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.click();
+        })
+        .catch(error => console.error('Fehler beim Abrufen der Datei:', error));
+}
+
+
+
+
+
+
 
 
 
