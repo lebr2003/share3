@@ -1083,17 +1083,22 @@ document.querySelectorAll('.video-wrapper img').forEach(function(img) {
 
 // Ereignislistener für Tastendruck
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        // Wenn die ESC-Taste gedrückt wird, schließe das Popup
-        closePopup();
-    } else if (event.key === 'ArrowLeft') {
-        // Wenn die linke Pfeiltaste gedrückt wird, zeige das vorherige Bild an
-        prevImage();
-    } else if (event.key === 'ArrowRight') {
-        // Wenn die rechte Pfeiltaste gedrückt wird, zeige das nächste Bild an
-        nextImage();
+    // Überprüfen, ob das Popup geöffnet ist
+    var popup = document.getElementById('popupContainer');
+    if (popup.style.display === 'flex') {
+        if (event.key === 'Escape') {
+            // Wenn die ESC-Taste gedrückt wird, schließe das Popup
+            closePopup();
+        } else if (event.key === 'ArrowLeft') {
+            // Wenn die linke Pfeiltaste gedrückt wird, zeige das vorherige Bild an
+            prevImage();
+        } else if (event.key === 'ArrowRight') {
+            // Wenn die rechte Pfeiltaste gedrückt wird, zeige das nächste Bild an
+            nextImage();
+        }
     }
 });
+
 
 // Variablen zur Verfolgung der Berührungskoordinaten
 let startX;
