@@ -1095,6 +1095,46 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+  // Variablen zur Verfolgung der Berührungskoordinaten
+let startX;
+let startY;
+let endX;
+let endY;
+
+// Eventlistener für Touchstart
+document.getElementById('popupImage').addEventListener('touchstart', function(event) {
+    startX = event.touches[0].clientX;
+    startY = event.touches[0].clientY;
+});
+
+// Eventlistener für Touchmove
+document.getElementById('popupImage').addEventListener('touchmove', function(event) {
+    endX = event.touches[0].clientX;
+    endY = event.touches[0].clientY;
+});
+
+// Eventlistener für Touchend
+document.getElementById('popupImage').addEventListener('touchend', function(event) {
+    // Berechnen der Verschiebung in X- und Y-Richtung
+    let deltaX = endX - startX;
+    let deltaY = endY - startY;
+
+    // Schwellenwert für Wischgeste
+    let threshold = 50;
+
+    // Überprüfen, ob die Wischgeste horizontal war und den Schwellenwert überschritten hat
+    if (Math.abs(deltaX) > threshold && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            // Wenn der Wisch nach rechts war, zeige das vorherige Bild an
+            prevImage();
+        } else {
+            // Wenn der Wisch nach links war, zeige das nächste Bild an
+            nextImage();
+        }
+    }
+});
+
+
 
 
 
