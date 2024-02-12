@@ -938,7 +938,7 @@ function downloadAllFiles() {
             // Diese Funktion wird aufgerufen, wenn die maximale Wartezeit überschritten wurde
             filesDownloaded++;
             checkCompletion();
-        }, 5000); // Setze eine Wartezeit von 5 Sekunden
+        }, 10000); // Setze eine Wartezeit von 10 Sekunden
 
         fetch(url, { mode: 'cors' }) // Fügen Sie 'cors' als Modus hinzu, um Cross-Origin-Requests zu ermöglichen
             .then(response => {
@@ -989,9 +989,6 @@ function downloadAllFiles() {
         }
     }
 }
-
-
-
 
 
 </script>
