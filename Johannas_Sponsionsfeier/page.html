@@ -70,6 +70,12 @@ video {
   button:hover {
     opacity: 0.8;
   }
+@media only screen and (max-width: 600px) {
+  /* Verstecke den Download-Button auf Mobilgeräten mit einer Bildschirmbreite von 600px oder weniger */
+  .download-button {
+    display: none;
+  }
+}
 .popup {
     position: fixed;
     top: 0;
@@ -103,7 +109,7 @@ video {
     text-decoration: none;
     cursor: pointer;
 }
-  #progressBarContainer {
+#progressBarContainer {
   width: 50%;
   height: 20px;
   background-color: #f0f0f0;
@@ -119,8 +125,8 @@ video {
   background-color: #4caf50;
   border-radius: 4px;
   transition: width 0.3s ease;
+  position: relative; /* Stellt sicher, dass #progressBarMessage relativ zum Balken positioniert wird */
 }
-/* Leuchtender Balken */
 #progressBar::after {
   content: '';
   position: absolute;
@@ -129,7 +135,6 @@ video {
   background-color: rgba(124, 252, 0, 0.5); /* Hellgrüne Farbe mit Transparenz */
   animation: progressAnimation 1s infinite alternate; /* Animation des leuchtenden Balkens */
 }
-/* CSS-Animation für den leuchtenden Balken */
 @keyframes progressAnimation {
   from {
     left: 0; /* Startposition des leuchtenden Balkens */
@@ -137,6 +142,14 @@ video {
   to {
     left: calc(100% - 20px); /* Endposition des leuchtenden Balkens */
   }
+}
+#progressBarMessage {
+  position: absolute; /* Positionierung relativ zum Fortschrittsbalken */
+  top: 50%; /* Vertikal zentriert */
+  left: 50%; /* Horizontal zentriert */
+  transform: translate(-50%, -50%); /* Zentrierung relativ zum Balken */
+  color: #000; /* Textfarbe */
+  font-size: 12px;
 }
 </style>
 
@@ -186,11 +199,12 @@ padding-bottom: 30px;
 
 
 </header>
-        <div class="video-container">
-<button onclick="downloadAllFiles()">alle Photos downloaden</button>
-        </div>
+<div class="video-container">
+  <button class="download-button" onclick="downloadAllFiles()" title="Große Dateien - längere Ladezeit">Alle Fotos herunterladen</button>
+</div>
 <div id="progressBarContainer" style="display: none;">
   <div id="progressBar"></div>
+  <div id="progressBarMessage">Download kann einige Minuten dauern ...</div>
 </div>
              
 
@@ -754,9 +768,9 @@ padding-bottom: 30px;
 
 
 
-        <div class="video-container">
-<button onclick="downloadAllFiles()">alle Photos downloaden</button>
-        </div>
+<div class="video-container">
+  <button onclick="downloadAllFiles()" title="Große Dateien - längere Ladezeit">Alle Fotos herunterladen</button>
+</div>
             
 
 <!-- Popup Container -->
