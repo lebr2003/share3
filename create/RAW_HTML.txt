@@ -69,6 +69,12 @@ video {
   button:hover {
     opacity: 0.8;
   }
+@media only screen and (max-width: 600px) {
+  /* Verstecke den Download-Button auf Mobilgeräten mit einer Bildschirmbreite von 600px oder weniger */
+  .download-button {
+    display: none;
+  }
+}
 .popup {
     position: fixed;
     top: 0;
@@ -101,6 +107,54 @@ video {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+#progressBarContainer {
+  /* Der Fortschrittsbalken wird standardmäßig auf 0% gesetzt */
+  width: 50%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  margin: 0 auto 10px auto;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+#progressBar {
+  /* Startposition des Fortschrittsbalkens */
+  width: 0;
+  max-width: 100%;
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 4px;
+  position: relative;
+}
+/* Der leuchtende Balken wird hier definiert */
+#progressBar::after {
+  content: '';
+  position: absolute;
+  width: 20px; /* Breite des leuchtenden Balkens */
+  height: 100%;
+  background-color: rgba(124, 252, 0, 0.5); /* Hellgrüne Farbe mit Transparenz */
+  /* Hier wird die Animation definiert */
+  animation: progressAnimation 1s infinite alternate;
+}
+/* Die Animation des leuchtenden Balkens */
+@keyframes progressAnimation {
+  from {
+    left: 0; /* Startposition des leuchtenden Balkens */
+  }
+  to {
+    left: calc(100% - 20px); /* Endposition des leuchtenden Balkens */
+  }
+}
+/* Die Nachricht über dem Fortschrittsbalken */
+#progressBarMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 12px;
 }
 </style>
 
@@ -149,10 +203,13 @@ padding-bottom: 30px;
 
 
 </header>
-
-        <div class="video-container">
-<button onclick="downloadAllFiles()">alle Photos downloaden</button>
-        </div>
+<div class="video-container">
+  <button class="download-button" onclick="downloadAllFiles()" title="Große Dateien - längere Ladezeit">Alle Fotos herunterladen</button>
+</div>
+<div id="progressBarContainer" style="display: none;">
+  <div id="progressBar"></div>
+  <div id="progressBarMessage">Download kann einige Minuten dauern ...</div>
+</div>
              
 
 
@@ -171,10 +228,6 @@ padding-bottom: 30px;
          </div>
 
 
-
-        <div class="video-container">
-<button onclick="downloadAllFiles()">alle Photos downloaden</button>
-        </div>
 
 <!-- Popup Container -->
 <div id="popupContainer" class="popup">
@@ -306,46 +359,116 @@ document.querySelectorAll('.video-wrapper img').forEach(function(img) {
 function downloadAllFiles() {
     var photoUrls = []; // Array zum Speichern der Bild-URLs
     var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
+    var totalFiles = 0;
+    var filesDownloaded = 0;
+
+    // Zähle die Anzahl der Video-Wrapper-Divs
+    var numberOfDivs = document.querySelectorAll('.video-wrapper').length;
+
+    // Berechne die Anzahl der Dateien X
+    var numberOfFiles = Math.ceil(numberOfDivs * 10 / 60);
 
     // Sammle die URLs aller Fotos
     document.querySelectorAll('.video-wrapper button').forEach(function(button) {
-        var url = button.getAttribute('onclick').match(/'(.*?)'/)[1];
-        photoUrls.push(url);
+        var downloadAttribute = button.getAttribute('onclick').match(/'(.*?)'/)[1];
+        photoUrls.push(downloadAttribute); // URL zum Array hinzufügen
+        totalFiles++;
     });
+
+    // Anzeigen des Ladeindikators
+    var progressBarContainer = document.getElementById('progressBarContainer');
+    progressBarContainer.style.display = 'block'; // Fortschrittsanzeige anzeigen
+
+    var progressBar = document.getElementById('progressBar');
+    var progressBarMessage = document.getElementById('progressBarMessage');
+
+    // Anzahl der Minuten berechnen
+    var minutes = Math.ceil(numberOfFiles);
+
+    // Fortschrittsbalken-Meldung aktualisieren
+    progressBarMessage.innerText = "Download kann bis zu " + minutes + " Minuten dauern ...";
 
     // Erstelle eine ZIP-Datei
     var zip = new JSZip();
-    var count = 0;
+
+    var startTime = Date.now(); // Startzeit des Downloads
+    var endTime = startTime + minutes * 60 * 1000; // Endzeit des Downloads
+
+    // Intervall für die kontinuierliche Aktualisierung des Fortschrittsbalkens
+    var progressInterval = setInterval(function() {
+        var currentTime = Date.now();
+        var elapsed = currentTime - startTime;
+        var progress = (elapsed / (minutes * 60 * 1000)) * 100; // Fortschrittsberechnung in Prozent
+
+        progressBar.style.width = progress + '%'; // Aktualisieren des Fortschrittsbalkens
+
+        if (currentTime >= endTime) {
+            clearInterval(progressInterval); // Stoppt das Intervall, wenn die Zeit abgelaufen ist
+            progressBar.style.width = '100%'; // Setzt den Fortschrittsbalken auf 100%
+        }
+    }, 500); // Aktualisiert den Fortschrittsbalken alle 0,5 Sekunden (500 Millisekunden)
 
     // Füge jede Foto-URL zur ZIP-Datei hinzu
     photoUrls.forEach(function(url) {
-        var filename = url.substring(url.lastIndexOf('/') + 1);
-        fetch(url)
-            .then(response => response.blob())
+        var filename = url.substring(url.lastIndexOf('/') + 1); // Dateiname aus der URL extrahieren
+        var isFullUrl = url.startsWith('http'); // Überprüfe, ob es sich um einen vollständigen Link handelt
+
+        if (!isFullUrl) {
+            // Wenn es sich nicht um einen vollständigen Link handelt, ergänze den Pfad entsprechend der aktuellen Seite
+            var currentLocation = window.location.href;
+            var baseUrl = currentLocation.substring(0, currentLocation.lastIndexOf('/') + 1);
+            url = baseUrl + url;
+        }
+
+        var timeout = setTimeout(function() {
+            // Diese Funktion wird aufgerufen, wenn die maximale Wartezeit überschritten wurde
+            filesDownloaded++;
+            checkCompletion();
+        }, 10000); // Setze eine Wartezeit von 10 Sekunden
+
+        fetch(url, { mode: 'cors' }) // Fügen Sie 'cors' als Modus hinzu, um Cross-Origin-Requests zu ermöglichen
+            .then(response => {
+                clearTimeout(timeout); // Lösche den Timeout, wenn die Datei erfolgreich geladen wird
+                return response.blob();
+            })
             .then(blob => {
-                zip.file(filename, blob);
-                count++;
-
-                // Wenn alle Fotos hinzugefügt wurden, erstelle die ZIP-Datei und starte den Download
-                if (count === photoUrls.length) {
-                    zip.generateAsync({ type: "blob" })
-                        .then(function(content) {
-                            var link = document.createElement('a');
-                            link.href = URL.createObjectURL(content);
-                            link.download = pageTitle + '.zip'; // Änderung hier: Verwende den Seitentitel für den Dateinamen
-                            link.click();
-
-                          // Ereignis an Google Analytics senden
-                          gtag('event', 'Download_' + pageTitle, {
-                               'Quelle': 'alle Photos'
-                            });
-                        });
-                }
+                zip.file(filename, blob); // Datei zur ZIP-Datei hinzufügen
+                filesDownloaded++;
+                checkCompletion();
+            })
+            .catch(error => {
+                // Behandlung von Fehlern beim Laden der Datei
+                console.error('Fehler beim Laden der Datei:', error);
+                filesDownloaded++;
+                checkCompletion();
             });
     });
+
+    function checkCompletion() {
+        // Überprüfen, ob alle Dateien heruntergeladen wurden
+        if (filesDownloaded === totalFiles) {
+            // Erstelle die ZIP-Datei und starte den Download
+            zip.generateAsync({ type: "blob" })
+                .then(function(content) {
+                    var link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
+                    link.click();
+
+                    // Ereignis an Google Analytics senden
+                    gtag('event', 'Download_' + pageTitle, {
+                        'Quelle': 'alle Photos'
+                    });
+
+                    // Zurücksetzen des Fortschrittsbalkens
+                    progressBar.style.width = '0%';
+
+                    // Fortschrittsanzeige ausblenden
+                    progressBarContainer.style.display = 'none';
+                });
+        }
+    }
 }
-
-
 
 
 </script>
