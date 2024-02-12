@@ -630,20 +630,6 @@ function closePopup() {
     popup.style.display = 'none'; // Popup ausblenden
 }
 
-// Funktion zum Anzeigen des vorherigen Bildes
-function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    var popupImage = document.getElementById('popupImage');
-    popupImage.src = images[currentIndex];
-}
-
-// Funktion zum Anzeigen des nächsten Bildes
-function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    var popupImage = document.getElementById('popupImage');
-    popupImage.src = images[currentIndex];
-}
-
 
 // Aktualisiere die Bild-URLs im images-Array
 document.querySelectorAll('.video-wrapper img').forEach(function(img) {
