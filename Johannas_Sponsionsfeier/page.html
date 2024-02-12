@@ -900,26 +900,94 @@ document.querySelectorAll('.video-wrapper img').forEach(function(img) {
 });
 
 function downloadAllFiles() {
-  // Selektiere alle Buttons mit der Klasse "download-button"
-  var buttons = document.querySelectorAll('button');
+    var photoUrls = []; // Array zum Speichern der Bild-URLs
+    var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
+    var totalFiles = 0;
+    var filesDownloaded = 0;
 
-  // Definiere eine rekursive Hilfsfunktion zum Klicken auf die Buttons nacheinander
-  function clickNextButton(index) {
-    // Überprüfe, ob der Index innerhalb des gültigen Bereichs liegt
-    if (index < buttons.length) {
-      // Klicke auf den Button
-      buttons[index].click();
-      
-      // Warte einen kurzen Moment, bevor der nächste Button geklickt wird
-      setTimeout(function() {
-        // Rufe die Hilfsfunktion rekursiv auf, um den nächsten Button zu klicken
-        clickNextButton(index + 1);
-      }, 1000); // Wartezeit in Millisekunden (hier 1000ms = 1 Sekunde)
+    // Sammle die URLs aller Fotos
+    document.querySelectorAll('.video-wrapper button').forEach(function(button) {
+        var downloadAttribute = button.getAttribute('onclick').match(/'(.*?)'/)[1];
+        photoUrls.push(downloadAttribute); // URL zum Array hinzufügen
+        totalFiles++;
+    });
+
+    // Anzeigen des Ladeindikators
+    var progressBarContainer = document.getElementById('progressBarContainer');
+    progressBarContainer.style.display = 'block'; // Fortschrittsanzeige anzeigen
+
+    var progressBar = document.getElementById('progressBar');
+
+    // Erstelle eine ZIP-Datei
+    var zip = new JSZip();
+    var count = 0;
+
+    // Füge jede Foto-URL zur ZIP-Datei hinzu
+    photoUrls.forEach(function(url) {
+        var filename = url.substring(url.lastIndexOf('/') + 1); // Dateiname aus der URL extrahieren
+        var isFullUrl = url.startsWith('http'); // Überprüfe, ob es sich um einen vollständigen Link handelt
+
+        if (!isFullUrl) {
+            // Wenn es sich nicht um einen vollständigen Link handelt, ergänze den Pfad entsprechend der aktuellen Seite
+            var currentLocation = window.location.href;
+            var baseUrl = currentLocation.substring(0, currentLocation.lastIndexOf('/') + 1);
+            url = baseUrl + url;
+        }
+
+        var timeout = setTimeout(function() {
+            // Diese Funktion wird aufgerufen, wenn die maximale Wartezeit überschritten wurde
+            filesDownloaded++;
+            checkCompletion();
+        }, 5000); // Setze eine Wartezeit von 5 Sekunden
+
+        fetch(url, { mode: 'cors' }) // Fügen Sie 'cors' als Modus hinzu, um Cross-Origin-Requests zu ermöglichen
+            .then(response => {
+                clearTimeout(timeout); // Lösche den Timeout, wenn die Datei erfolgreich geladen wird
+                return response.blob();
+            })
+            .then(blob => {
+                zip.file(filename, blob); // Datei zur ZIP-Datei hinzufügen
+                filesDownloaded++;
+                checkCompletion();
+            })
+            .catch(error => {
+                // Behandlung von Fehlern beim Laden der Datei
+                console.error('Fehler beim Laden der Datei:', error);
+                filesDownloaded++;
+                checkCompletion();
+            });
+    });
+
+    function checkCompletion() {
+        // Überprüfen, ob alle Dateien heruntergeladen wurden
+        if (filesDownloaded === totalFiles) {
+            // Erstelle die ZIP-Datei und starte den Download
+            zip.generateAsync({ type: "blob" })
+                .then(function(content) {
+                    var link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
+                    link.click();
+
+                    // Ereignis an Google Analytics senden
+                    gtag('event', 'Download_' + pageTitle, {
+                        'Quelle': 'alle Photos'
+                    });
+
+                    // Zurücksetzen des Fortschrittsbalkens
+                    progressBar.style.width = '0%';
+
+                    // Fortschrittsanzeige ausblenden
+                    progressBarContainer.style.display = 'none';
+                });
+        } else {
+            // Aktualisieren des Fortschrittsbalkens
+            var progress = (filesDownloaded / totalFiles) * 100;
+            setTimeout(function() {
+                progressBar.style.width = progress + '%';
+            }, 100); // Fügen Sie eine kleine Verzögerung hinzu, um die Aktualisierung zu ermöglichen
+        }
     }
-  }
-
-  // Starte das Klicken auf den ersten Button
-  clickNextButton(0);
 }
 
 
