@@ -905,6 +905,12 @@ function downloadAllFiles() {
     var totalFiles = 0;
     var filesDownloaded = 0;
 
+    // Zähle die Anzahl der Video-Wrapper-Divs
+    var numberOfDivs = document.querySelectorAll('.video-wrapper').length;
+
+    // Berechne die Anzahl der Dateien X
+    var numberOfFiles = Math.ceil(numberOfDivs * 10 / 60);
+
     // Sammle die URLs aller Fotos
     document.querySelectorAll('.video-wrapper button').forEach(function(button) {
         var downloadAttribute = button.getAttribute('onclick').match(/'(.*?)'/)[1];
@@ -917,6 +923,13 @@ function downloadAllFiles() {
     progressBarContainer.style.display = 'block'; // Fortschrittsanzeige anzeigen
 
     var progressBar = document.getElementById('progressBar');
+
+    // Anzahl der Minuten berechnen
+    var minutes = Math.ceil(numberOfFiles);
+
+    // Fortschrittsbalken-Meldung aktualisieren
+    var progressBarMessage = document.getElementById('progressBarMessage');
+    progressBarMessage.innerText = "Download kann bis zu " + minutes + " Minuten dauern ...";
 
     // Erstelle eine ZIP-Datei
     var zip = new JSZip();
@@ -989,6 +1002,7 @@ function downloadAllFiles() {
         }
     }
 }
+
 
 
 </script>
