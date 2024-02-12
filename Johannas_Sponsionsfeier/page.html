@@ -854,8 +854,8 @@ function downloadAllFiles() {
 
     // Sammle die URLs aller Fotos
     document.querySelectorAll('.video-wrapper button').forEach(function(button) {
-        var url = button.getAttribute('onclick').match(/'(.*?)'/)[1]; // Pfad aus dem onclick-Attribut extrahieren
-        photoUrls.push(url); // URL zum Array hinzufügen
+        var downloadAttribute = button.getAttribute('onclick').match(/'(.*?)'/)[1];
+        photoUrls.push(downloadAttribute); // URL zum Array hinzufügen
     });
 
     // Erstelle eine ZIP-Datei
@@ -864,10 +864,19 @@ function downloadAllFiles() {
 
     // Füge jede Foto-URL zur ZIP-Datei hinzu
     photoUrls.forEach(function(url) {
+        var filename = url.substring(url.lastIndexOf('/') + 1); // Dateiname aus der URL extrahieren
+        var isFullUrl = url.startsWith('http'); // Überprüfe, ob es sich um einen vollständigen Link handelt
+
+        if (!isFullUrl) {
+            // Wenn es sich nicht um einen vollständigen Link handelt, ergänze den Pfad entsprechend der aktuellen Seite
+            var currentLocation = window.location.href;
+            var baseUrl = currentLocation.substring(0, currentLocation.lastIndexOf('/') + 1);
+            url = baseUrl + url;
+        }
+
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
-                var filename = url.substring(url.lastIndexOf('/') + 1); // Dateiname aus der URL extrahieren
                 zip.file(filename, blob); // Datei zur ZIP-Datei hinzufügen
                 count++;
 
@@ -889,6 +898,7 @@ function downloadAllFiles() {
             });
     });
 }
+
 
 
 
