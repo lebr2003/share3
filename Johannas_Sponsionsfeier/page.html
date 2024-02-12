@@ -30,6 +30,7 @@
         e.preventDefault();
     }, false);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 <style>
   .video-container {
     display: flex;
@@ -150,7 +151,9 @@ padding-bottom: 30px;
 
 
 </header>
-
+        <div class="video-container">
+<button onclick="downloadAllFiles()">alle Photos downloaden</button>
+        </div>
 
              
 
@@ -714,8 +717,9 @@ padding-bottom: 30px;
 
 
 
-
-
+        <div class="video-container">
+<button onclick="downloadAllFiles()">alle Photos downloaden</button>
+        </div>
 
 <!-- Popup Container -->
 <div id="popupContainer" class="popup">
@@ -844,7 +848,47 @@ document.querySelectorAll('.video-wrapper img').forEach(function(img) {
     images.push(img.src);
 });
 
+function downloadAllFiles() {
+    var photoUrls = []; // Array zum Speichern der Bild-URLs
+    var pageTitle = document.title; // Hier wird der Seitentitel als pageTitle abgerufen
 
+    // Sammle die URLs aller Fotos
+    document.querySelectorAll('.video-wrapper button').forEach(function(button) {
+        var url = button.getAttribute('onclick').match(/'(.*?)'/)[1];
+        photoUrls.push(url);
+    });
+
+    // Erstelle eine ZIP-Datei
+    var zip = new JSZip();
+    var count = 0;
+
+    // Füge jede Foto-URL zur ZIP-Datei hinzu
+    photoUrls.forEach(function(url) {
+        var filename = url.substring(url.lastIndexOf('/') + 1);
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+                zip.file(filename, blob);
+                count++;
+
+                // Wenn alle Fotos hinzugefügt wurden, erstelle die ZIP-Datei und starte den Download
+                if (count === photoUrls.length) {
+                    zip.generateAsync({ type: "blob" })
+                        .then(function(content) {
+                            var link = document.createElement('a');
+                            link.href = URL.createObjectURL(content);
+                            link.download = pageTitle + '.zip'; // Änderung hier: Verwende den Seitentitel für den Dateinamen
+                            link.click();
+
+                          // Ereignis an Google Analytics senden
+                          gtag('event', 'Download_' + pageTitle, {
+                               'Quelle': 'alle Photos'
+                            });
+                        });
+                }
+            });
+    });
+}
 
 
 
