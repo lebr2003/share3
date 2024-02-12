@@ -101,30 +101,6 @@ video {
     text-decoration: none;
     cursor: pointer;
 }
-.navigation {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 20px; /* Einrücken der Schaltflächen um 20px */
-    z-index: 999;
-}
-.navigation button {
-    padding: 110px; /* Standardpolsterung für die Schaltflächen */
-    background-color: transparent; /* Transparenter Hintergrund */
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.3s ease; /* Übergangseffekt für Deckkraft */
-    opacity: 0.5; /* Deckkraft standardmäßig auf 50% */
-    width: 350px; /* Breite der Schaltflächen erhöhen */
-    height: 350px; /* Höhe der Schaltflächen erhöhen */
-}
-.navigation button:hover {
-    opacity: 0.8; /* Deckkraft bei Hover auf 80% erhöhen */
-}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -937,10 +913,7 @@ padding-bottom: 30px;
 <!-- Popup Container -->
 <div id="popupContainer" class="popup">
     <span class="close" onclick="closePopup()">&times;</span>
-
     <img id="popupImage" src="" alt="Popup Bild">
-
-
 </div>
 
               
