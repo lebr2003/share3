@@ -923,17 +923,33 @@ function downloadAllFiles() {
     progressBarContainer.style.display = 'block'; // Fortschrittsanzeige anzeigen
 
     var progressBar = document.getElementById('progressBar');
+    var progressBarMessage = document.getElementById('progressBarMessage');
 
     // Anzahl der Minuten berechnen
     var minutes = Math.ceil(numberOfFiles);
 
     // Fortschrittsbalken-Meldung aktualisieren
-    var progressBarMessage = document.getElementById('progressBarMessage');
     progressBarMessage.innerText = "Download kann bis zu " + minutes + " Minuten dauern ...";
 
     // Erstelle eine ZIP-Datei
     var zip = new JSZip();
-    var count = 0;
+
+    var startTime = Date.now(); // Startzeit des Downloads
+    var endTime = startTime + minutes * 60 * 1000; // Endzeit des Downloads
+
+    // Intervall für die kontinuierliche Aktualisierung des Fortschrittsbalkens
+    var progressInterval = setInterval(function() {
+        var currentTime = Date.now();
+        var elapsed = currentTime - startTime;
+        var progress = (elapsed / (minutes * 60 * 1000)) * 100; // Fortschrittsberechnung in Prozent
+
+        progressBar.style.width = progress + '%'; // Aktualisieren des Fortschrittsbalkens
+
+        if (currentTime >= endTime) {
+            clearInterval(progressInterval); // Stoppt das Intervall, wenn die Zeit abgelaufen ist
+            progressBar.style.width = '100%'; // Setzt den Fortschrittsbalken auf 100%
+        }
+    }, 500); // Aktualisiert den Fortschrittsbalken alle 0,5 Sekunden (500 Millisekunden)
 
     // Füge jede Foto-URL zur ZIP-Datei hinzu
     photoUrls.forEach(function(url) {
@@ -993,16 +1009,9 @@ function downloadAllFiles() {
                     // Fortschrittsanzeige ausblenden
                     progressBarContainer.style.display = 'none';
                 });
-        } else {
-            // Aktualisieren des Fortschrittsbalkens
-            var progress = (filesDownloaded / totalFiles) * 100;
-            setTimeout(function() {
-                progressBar.style.width = progress + '%';
-            }, 100); // Fügen Sie eine kleine Verzögerung hinzu, um die Aktualisierung zu ermöglichen
         }
     }
 }
-
 
 
 </script>
