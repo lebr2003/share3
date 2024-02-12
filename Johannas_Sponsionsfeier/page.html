@@ -941,7 +941,7 @@ function downloadAllFiles() {
             checkCompletion();
         }, 5000); // Setze eine Wartezeit von 5 Sekunden
 
-        fetch(url)
+        fetch(url, { mode: 'cors' }) // Fügen Sie 'cors' als Modus hinzu, um Cross-Origin-Requests zu ermöglichen
             .then(response => {
                 clearTimeout(timeout); // Lösche den Timeout, wenn die Datei erfolgreich geladen wird
                 return response.blob();
@@ -988,6 +988,7 @@ function downloadAllFiles() {
         }
     }
 }
+
 
 
 
