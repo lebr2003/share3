@@ -920,40 +920,58 @@ function downloadAllFiles() {
             url = baseUrl + url;
         }
 
+        var timeout = setTimeout(function() {
+            // Diese Funktion wird aufgerufen, wenn die maximale Wartezeit überschritten wurde
+            filesDownloaded++;
+            checkCompletion();
+        }, 5000); // Setze eine Wartezeit von 5 Sekunden
+
         fetch(url)
-            .then(response => response.blob())
+            .then(response => {
+                clearTimeout(timeout); // Lösche den Timeout, wenn die Datei erfolgreich geladen wird
+                return response.blob();
+            })
             .then(blob => {
                 zip.file(filename, blob); // Datei zur ZIP-Datei hinzufügen
                 filesDownloaded++;
-
-                // Wenn alle Fotos heruntergeladen wurden
-                if (filesDownloaded === totalFiles) {
-                    // Erstelle die ZIP-Datei und starte den Download
-                    zip.generateAsync({ type: "blob" })
-                        .then(function(content) {
-                            var link = document.createElement('a');
-                            link.href = URL.createObjectURL(content);
-                            link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
-                            link.click();
-
-                            // Ereignis an Google Analytics senden
-                            gtag('event', 'Download_' + pageTitle, {
-                                'Quelle': 'alle Photos'
-                            });
-
-                            // Zurücksetzen des Fortschrittsbalkens
-                            progressBar.style.width = '0%';
-
-                            // Fortschrittsanzeige ausblenden
-                            progressBarContainer.style.display = 'none';
-                        });
-                } else {
-                    // Aktualisieren des Fortschrittsbalkens
-                    var progress = (filesDownloaded / totalFiles) * 100;
-                    progressBar.style.width = progress + '%';
-                }
+                checkCompletion();
+            })
+            .catch(error => {
+                // Behandlung von Fehlern beim Laden der Datei
+                console.error('Fehler beim Laden der Datei:', error);
+                filesDownloaded++;
+                checkCompletion();
             });
     });
+
+    function checkCompletion() {
+        // Überprüfen, ob alle Dateien heruntergeladen wurden
+        if (filesDownloaded === totalFiles) {
+            // Erstelle die ZIP-Datei und starte den Download
+            zip.generateAsync({ type: "blob" })
+                .then(function(content) {
+                    var link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
+                    link.click();
+
+                    // Ereignis an Google Analytics senden
+                    gtag('event', 'Download_' + pageTitle, {
+                        'Quelle': 'alle Photos'
+                    });
+
+                    // Zurücksetzen des Fortschrittsbalkens
+                    progressBar.style.width = '0%';
+
+                    // Fortschrittsanzeige ausblenden
+                    progressBarContainer.style.display = 'none';
+                });
+        } else {
+            // Aktualisieren des Fortschrittsbalkens
+            var progress = (filesDownloaded / totalFiles) * 100;
+            progressBar.style.width = progress + '%';
+        }
+    }
 }
 
 
