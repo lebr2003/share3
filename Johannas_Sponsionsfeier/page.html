@@ -854,8 +854,8 @@ function downloadAllFiles() {
 
     // Sammle die URLs aller Fotos
     document.querySelectorAll('.video-wrapper button').forEach(function(button) {
-        var url = button.getAttribute('onclick').match(/'(.*?)'/)[1];
-        photoUrls.push(url);
+        var url = button.getAttribute('onclick').match(/'(.*?)'/)[1]; // Pfad aus dem onclick-Attribut extrahieren
+        photoUrls.push(url); // URL zum Array hinzufügen
     });
 
     // Erstelle eine ZIP-Datei
@@ -864,11 +864,11 @@ function downloadAllFiles() {
 
     // Füge jede Foto-URL zur ZIP-Datei hinzu
     photoUrls.forEach(function(url) {
-        var filename = url.substring(url.lastIndexOf('/') + 1);
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
-                zip.file(filename, blob);
+                var filename = url.substring(url.lastIndexOf('/') + 1); // Dateiname aus der URL extrahieren
+                zip.file(filename, blob); // Datei zur ZIP-Datei hinzufügen
                 count++;
 
                 // Wenn alle Fotos hinzugefügt wurden, erstelle die ZIP-Datei und starte den Download
@@ -877,12 +877,12 @@ function downloadAllFiles() {
                         .then(function(content) {
                             var link = document.createElement('a');
                             link.href = URL.createObjectURL(content);
-                            link.download = pageTitle + '.zip'; // Änderung hier: Verwende den Seitentitel für den Dateinamen
+                            link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
                             link.click();
 
-                          // Ereignis an Google Analytics senden
-                          gtag('event', 'Download_' + pageTitle, {
-                               'Quelle': 'alle Photos'
+                            // Ereignis an Google Analytics senden
+                            gtag('event', 'Download_' + pageTitle, {
+                                'Quelle': 'alle Photos'
                             });
                         });
                 }
