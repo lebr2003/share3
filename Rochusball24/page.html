@@ -786,31 +786,37 @@ function downloadAllFiles() {
             });
     });
 
-    function checkCompletion() {
-        // Überprüfen, ob alle Dateien heruntergeladen wurden
-        if (filesDownloaded === totalFiles) {
-            // Erstelle die ZIP-Datei und starte den Download
-            zip.generateAsync({ type: "blob" })
-                .then(function(content) {
-                    var link = document.createElement('a');
-                    link.href = URL.createObjectURL(content);
-                    link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
-                    link.click();
+function checkCompletion() {
+    // Überprüfen, ob alle Dateien heruntergeladen wurden
+    if (filesDownloaded === totalFiles) {
+        // Erstelle die ZIP-Datei und starte den Download
+        zip.generateAsync({ type: "blob" })
+            .then(function(content) {
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = pageTitle + '.zip'; // Verwende den Seitentitel für den Dateinamen der ZIP-Datei
+                link.click();
 
-                    // Ereignis an Google Analytics senden
-                    gtag('event', 'Download_' + pageTitle, {
-                        'Quelle': 'alle Photos'
-                    });
-
-                    // Zurücksetzen des Fortschrittsbalkens
-                    progressBar.style.width = '0%';
-
-                    // Fortschrittsanzeige ausblenden
-                    progressBarContainer.style.display = 'none';
+                // Ereignis an Google Analytics senden
+                gtag('event', 'Download_' + pageTitle, {
+                    'Quelle': 'alle Photos'
                 });
+
+                // Zurücksetzen des Fortschrittsbalkens
+                progressBar.style.width = '0%';
+
+                // Fortschrittsanzeige ausblenden
+                progressBarContainer.style.display = 'none';
+            });
+
+        // Überprüfen, ob alle Dateien erfolgreich heruntergeladen wurden
+        if (filesDownloaded < totalFiles) {
+            // Warnung anzeigen, dass nicht alle Dateien erfolgreich heruntergeladen wurden
+            alert('Es konnten nicht alle Dateien erfolgreich heruntergeladen werden!');
         }
     }
 }
+
 
 
 
