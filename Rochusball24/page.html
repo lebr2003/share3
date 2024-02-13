@@ -807,13 +807,13 @@ function checkCompletion() {
 
                 // Fortschrittsanzeige ausblenden
                 progressBarContainer.style.display = 'none';
-            });
 
-        // Überprüfen, ob alle Dateien erfolgreich heruntergeladen wurden
-        if (filesDownloaded < totalFiles) {
-            // Warnung anzeigen, dass nicht alle Dateien erfolgreich heruntergeladen wurden
-            alert('Es konnten nicht alle Dateien erfolgreich heruntergeladen werden!');
-        }
+                // Überprüfen, ob alle Dateien erfolgreich heruntergeladen wurden
+                if (filesDownloaded < totalFiles) {
+                    // Warnung anzeigen, dass nicht alle Dateien erfolgreich heruntergeladen wurden
+                    alert('Es konnten nicht alle Dateien erfolgreich heruntergeladen werden!');
+                }
+            });
     }
 }
 
