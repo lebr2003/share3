@@ -19,15 +19,30 @@
     }
     "></script>
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
+<!-- Google tag (gtag.js) -->
+<script id="googleAnalyticsScript" data-consent-state="pending" async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  function loadGoogleAnalytics() {
+    var consentState = document.getElementById("googleAnalyticsScript").getAttribute("data-consent-state");
+    if (consentState === "accepted") {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VBTEF3MQEQ');
+    }
+  }
 
-  gtag('config', 'G-VBTEF3MQEQ');
+  function consentToAnalytics() {
+    document.getElementById("googleAnalyticsScript").setAttribute("data-consent-state", "accepted");
+    loadGoogleAnalytics();
+    document.getElementById('cookieBanner').style.display = 'none'; // Verberge den Cookie-Banner nach Zustimmung
+  }
+
+  window.onload = function() {
+    loadGoogleAnalytics();
+  };
 </script>
+
 
 </head>
   <body class="transition-enabled">    <section class="splash centered e2e-site-content">
@@ -174,6 +189,10 @@ padding-bottom: 0px;
       </div>
     </section>
 
+<div id="cookieBanner" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f8f9fa; padding: 10px; text-align: center;">
+    <p>Diese Webseite verwendet Cookies, um die Benutzererfahrung zu verbessern. <a href="datenschutzerklaerung.html">Datenschutzerklärung</a></p>
+    <button onclick="consentToAnalytics()">Aktivieren</button>
+</div>
 
  
 </body>
