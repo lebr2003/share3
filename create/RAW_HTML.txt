@@ -294,7 +294,7 @@ padding-bottom: 30px;
                     </ul>
                   </div>
                 <div class="footer-text">
-                  Leander Brunar – Vienna
+                  <a href="https://share.leanderbrunar.net/datenschutzerklaerung.html">Datenschutzerklärung</a> | <a href="https://share.leanderbrunar.net/impressum.html">Impressum</a>
                 </div>
               </footer>
 </body>
