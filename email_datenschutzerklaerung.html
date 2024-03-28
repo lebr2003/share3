@@ -1,17 +1,21 @@
-
-
 <!DOCTYPE HTML>
 <html lang="de-AT">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
       <meta  property="og:image" content="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/18a55f3d-2fda-4cc6-ac7e-9c537b1f69c6_rwc_0x0x421x421x421.jpeg?h=dc8ec43183666b59b44a07bd105c3f31" />
         <link rel="icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/3196d310-9f5c-4aa3-9efd-229f42032276_carw_1x1x32.jpeg?h=fd0310396e87cc87e9afb7e4d343984e" />
         <link rel="apple-touch-icon" href="https://cdn.myportfolio.com/45979554-5507-4831-a885-c05d530ea5de/f810a750-a3b1-4d2d-aadc-9d9733d7f235_carw_1x1x180.jpeg?h=9d3d9be30d26b566bf0dd7e6e9472ce3" />
       <link rel="stylesheet" href="https://share.leanderbrunar.net/style.css" type="text/css" />
     <link rel="canonical" href="https://leanderbrunar.net/leander-brunar" />
-      <title>Datenschutzerklärung - E-Mail</title>
+
+
+
+                   <title>Datenschutzerklärung</title>
+
+
+
+
     <script type="text/javascript" src="https://use.typekit.net/ik/DAFcdHHE1qRRSJJi-hckCuopTISzUT2E2blBinmi4vGfeGMffHYEBsJzwD9oFDIDWDJUZ28KZc4yFcIUweZRwQMDZRiyF2mRZAZyZAJ3ZQMoFDb3ZRsqjD6-q3I7OcU8jAoqZW4KS1m0jWJ0dcmXOfG0dW83da4XZcNC-Av0jhNlOfG0SY4zwKuh-AmaOcuoSeNkieZzde8zOcFzdPUCZAB0Zemkj14udcBkOco8ifUlpWgzS1scdhUTdkoRdhXCSY4zwKuh-AmaOcuoSeNkieZzde8zOcFzdPUaiaS0demydcs8Sc4kiAoySKo0ZWbKgeZXdcCKgYFGpcw7fbKImsMMeMb6MKG4fJBmIMMjgkMfH6GJ8HbfIMIjgfMfqMeJzzKBg6.js?cb=47a664330854441e7fc00a8c3e7b38610e6a2e05" async onload="
     try {
       window.Typekit.load();
@@ -19,8 +23,142 @@
       console.warn('Typekit not loaded.');
     }
     "></script>
+<script type="text/javascript">
+    // Verhindere Rechtsklick
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, false);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<style>
+  .video-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontal zentrieren */
+  width: 400px;
+  position: relative;
+}
+.video-wrapper img {
+    cursor: zoom-in; /* Vergrößerungslupe nur für Bilder */
+}
+video {
+      width: 100%;
+      max-width: 100%; /* Volle Breite innerhalb des Containers */
+    }
+  button {
+    background-color: #A6C7EC;
+    color: #022A55;
+    font-size: 16px;
+    height: 30px;
+    border: 1px solid #022A55;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-family: 'Bebas Kai', sans-serif;
+    font-stretch: ultra-condensed;
+    padding: 0 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+@media only screen and (max-width: 600px) {
+  /* Verstecke den Download-Button auf Mobilgeräten mit einer Bildschirmbreite von 600px oder weniger */
+  .download-button {
+    display: none;
+  }
+}
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Weiß mit 80% Deckkraft */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.popup img {
+    max-width: 100%; /* Maximale Breite des Bildes auf 100% der Popup-Breite begrenzen */
+    max-height: 100%; /* Maximale Höhe des Bildes auf 100% der Popup-Höhe begrenzen */
+    width: auto; /* Automatische Breite basierend auf dem Inhalt */
+    height: auto; /* Automatische Höhe basierend auf dem Inhalt */
+    object-fit: contain; /* Bild an den verfügbaren Platz anpassen */
+}
+.close {
+    color: #aaaaaa;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#progressBarContainer {
+  /* Der Fortschrittsbalken wird standardmäßig auf 0% gesetzt */
+  width: 50%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  margin: 0 auto 10px auto;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+#progressBar {
+  /* Startposition des Fortschrittsbalkens */
+  width: 0;
+  max-width: 100%;
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 4px;
+  position: relative;
+}
+/* Der leuchtende Balken wird hier definiert */
+#progressBar::after {
+  content: '';
+  position: absolute;
+  width: 20px; /* Breite des leuchtenden Balkens */
+  height: 100%;
+  background-color: rgba(124, 252, 0, 0.5); /* Hellgrüne Farbe mit Transparenz */
+  /* Hier wird die Animation definiert */
+  animation: progressAnimation 1s infinite alternate;
+}
+/* Die Animation des leuchtenden Balkens */
+@keyframes progressAnimation {
+  from {
+    left: 0; /* Startposition des leuchtenden Balkens */
+  }
+  to {
+    left: calc(100% - 20px); /* Endposition des leuchtenden Balkens */
+  }
+}
+/* Die Nachricht über dem Fortschrittsbalken */
+#progressBarMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 12px;
+}
+</style>
 
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBTEF3MQEQ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -29,6 +167,7 @@
 
   gtag('config', 'G-VBTEF3MQEQ');
 </script>
+
 
 </head>
   <body class="transition-enabled">    <section class="splash centered e2e-site-content">
@@ -40,10 +179,6 @@
         <div id="project-canvas" class="js-project-modules modules content">
           <div id="project-modules">
               
-              
-    
-              
-              
               <div class="project-module module text project-module-text align- js-project-module e2e-site-project-module-text" style="padding-top: 0px;
 padding-bottom: 30px;
   width: 100%;
@@ -51,17 +186,23 @@ padding-bottom: 30px;
   float: center;
   clear: both;
 ">
-
-            <div class="title">
+<div class="rich-text js-text-editable module-text">
+    <div class="title">
         <a href="https://leanderbrunar.net/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Leander Brunar</a>
     </div>
-
-
-
-
+</div>
+</div>
         <header class="page-header content" data-context="pages" data-identity="id:p65c0d05aa37393bcfe8ba3a1352692c9560a9dd8e44b012b07a94" data-hover-hint="pageHeader" data-hover-hint-id="p65c0d05aa37393bcfe8ba3a1352692c9560a9dd8e44b012b07a94">
-            <h1 class="title preserve-whitespace e2e-site-logo-text">Datenschutzerklärung</h1>
-        </header>
+
+
+                   <h1 class="title preserve-whitespace e2e-site-logo-text">Datenschutzerklärung</h1>
+
+
+
+
+
+
+</header>
 
 
              
