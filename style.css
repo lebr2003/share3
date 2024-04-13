@@ -2330,6 +2330,41 @@ nav {
       .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c'] .button-module::before, .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c'] .button-module::after {
         width: 26px; } }
 
+.project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module {
+  border-radius: 100px;
+  color: #ffffff;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+  text-transform: none;
+  background-color: #022a55;
+  border: none; }
+  .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module::before, .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module::after {
+    width: 30px; }
+  .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module:hover {
+    color: #ffffff;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: none;
+    background-color: rgba(2, 42, 85, 0.8); }
+  @media (max-width: 768px) {
+    .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module {
+      font-size: 14px;
+      height: 46px;
+      line-height: 46px; }
+      .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module::before, .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module::after {
+        width: 29px; } }
+  @media (max-width: 540px) {
+    .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module {
+      font-size: 14px;
+      height: 42px;
+      line-height: 42px; }
+      .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module::before, .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module::after {
+        width: 26px; } }
+
 .project-module-button[data-id='m60a38458a63c7a0e069f3511ffb24857dbbb23a35c51eda57d32e'] .button-module {
   border-radius: 100px;
   color: #ffffff;
