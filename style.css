@@ -2333,10 +2333,10 @@ nav {
 .project-module-button[data-id='m60a383aae7e6fadbcbf8570d53c43602f497a0b493a1a3573041c2'] .button-module {
   border-radius: 100px;
   color: #ffffff;
-  font-family: Helvetica;
-  font-size: 18px;
+  font-family: "bebas-neue-pro";
+  font-weight: 600;
   font-style: normal;
-  font-weight: 400;
+  font-size: 18px;
   line-height: 48px;
   text-transform: none;
   background-color: #022a55;
